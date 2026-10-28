@@ -1,0 +1,4 @@
+datasets>=3.0
+pillow
+torch
+torchvision
