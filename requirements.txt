@@ -2,3 +2,8 @@ datasets>=3.0
 pillow
 torch
 torchvision
+numpy
+scikit-learn
+matplotlib
+joblib
+threadpoolctl

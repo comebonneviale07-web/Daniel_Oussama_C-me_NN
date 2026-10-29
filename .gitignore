@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+# Keep small experiment reports; trained weights stay local.
+runs/*
+!runs/*/
+runs/*/*
+!runs/*/*.json
+!runs/*/*.csv
+!runs/*/*.png
+!runs/*/*.md
+backups/
