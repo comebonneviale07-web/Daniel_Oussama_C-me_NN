@@ -1,0 +1,17 @@
+{
+  "id": "m3_frozen_augmented",
+  "version": "m3/v4_frozen_augmented",
+  "kind": "resnet18",
+  "input_size": 224,
+  "normalization": "imagenet",
+  "frozen": true,
+  "augmentation": "paintings",
+  "optimizer": "adamw",
+  "weight_decay": 0.0001,
+  "scheduler": "cosine",
+  "label_smoothing": 0.1,
+  "selection_metric": "val_macro_f1",
+  "patience": 4,
+  "epochs": 15,
+  "lr": 0.001
+}

@@ -1,0 +1,17 @@
+{
+  "id": "m1_tuned",
+  "version": "m1/v2_tuned",
+  "kind": "mlp",
+  "input_size": 64,
+  "hidden_sizes": [
+    256
+  ],
+  "activation": "relu",
+  "dropout": 0.0,
+  "normalization": "training_channel",
+  "augmentation": "flip",
+  "selection_metric": "val_macro_f1",
+  "patience": 8,
+  "epochs": 30,
+  "lr": 0.0001
+}

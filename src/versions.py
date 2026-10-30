@@ -10,6 +10,11 @@ MODEL_VERSIONS = {
     "m2_fixed": "M2/v2_relu",
     "m3_frozen": "M3/v1_frozen",
     "m3": "M3/v2_finetuned",
+    "m0_features": "M0/v2_features",
+    "m1_tuned": "M1/v2_tuned",
+    "m2_regularised": "M2/v3_regularised",
+    "m3_augmented": "M3/v3_augmented",
+    "m3_frozen_augmented": "M3/v4_frozen_augmented",
 }
 
 
@@ -38,7 +43,9 @@ def write_run_readme(run, config, metrics=None, selected_epoch=None):
         lines += ["## Résultats", "", f"Accuracy test : {metrics['accuracy']:.2%}.",
                   f"Macro F1 test : {metrics['macro_f1']:.4f}."]
         if selected_epoch is not None:
-            lines += [f"Checkpoint choisi sur la perte de validation : époque {selected_epoch}."]
+            metric = config.get("version_settings", {}).get("selection_metric", "val_loss")
+            label = {"val_loss": "la perte de validation", "val_macro_f1": "le macro F1 de validation"}[metric]
+            lines += [f"Checkpoint choisi sur {label} : époque {selected_epoch}."]
         lines += ["", "Voir history.json, test_metrics.json et test_predictions.csv pour les mesures détaillées.", ""]
     lines += ["## Fiche de version (copie au moment de la documentation)", "", explanation]
     (run / "README.md").write_text("\n".join(lines), encoding="utf-8")
