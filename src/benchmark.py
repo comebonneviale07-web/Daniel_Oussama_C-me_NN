@@ -22,14 +22,21 @@ from PIL import Image
 from sklearn.metrics import f1_score
 from threadpoolctl import threadpool_limits
 
+from src.features import logistic_inputs
 from src.training import ROOT, build_model, preprocessing, write_json
+from src.versions import get_version
 
 FAMILIES = {"m0": "Classical", "m1": "MLP on pixels", "m2": "MLP on pixels",
             "m2_fixed": "MLP on pixels",
-            "m3": "Pretrained ResNet-18", "m3_frozen": "Pretrained ResNet-18"}
+            "m3": "Pretrained ResNet-18", "m3_frozen": "Pretrained ResNet-18",
+            "m0_features": "Classical", "m1_tuned": "MLP on pixels", "m2_regularised": "MLP on pixels",
+            "m3_augmented": "Pretrained ResNet-18", "m3_frozen_augmented": "Pretrained ResNet-18"}
 LABELS = {"m0": "M0 logistic regression", "m1": "M1 MLP, 1 ReLU layer", "m2": "M2 MLP, 5 sigmoid layers",
           "m2_fixed": "M2 corrected, 5 ReLU layers",
-          "m3": "M3 ResNet-18, fine-tuned", "m3_frozen": "M3 ResNet-18, frozen"}
+          "m3": "M3 ResNet-18, fine-tuned", "m3_frozen": "M3 ResNet-18, frozen",
+          "m0_features": "M0 hand-crafted features", "m1_tuned": "M1 tuned (standardised, flip)",
+          "m2_regularised": "M2 regularised (BatchNorm, flip)", "m3_augmented": "M3 fine-tuned + augmentation",
+          "m3_frozen_augmented": "M3 frozen + augmentation"}
 COLORS = {"Classical": "#eb6834", "MLP on pixels": "#2a78d6", "Pretrained ResNet-18": "#1baf7a"}
 
 
@@ -63,11 +70,33 @@ def size_mb(model):
     return buffer.tell() / 1e6
 
 
+def untrained_logistic(spec, classes):
+    """A logistic regression (with its scaler if the version has one) of the version's exact input and output
+    sizes, for timing a run whose best.joblib is not on this computer: prediction cost depends only on sizes."""
+    import warnings
+
+    from sklearn.exceptions import ConvergenceWarning
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import StandardScaler
+    size = spec["input_size"]
+    features = logistic_inputs(spec, torch.rand(classes, 3, size, size))
+    model = LogisticRegression(max_iter=10)
+    if spec.get("standardize"):
+        model = make_pipeline(StandardScaler(), model)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", ConvergenceWarning)  # weights are irrelevant for timing
+        return model.fit(features, np.arange(classes))
+
+
 def load_model(name, run, classes):
     """The run's trained model if its weights are on this computer, else the same architecture (trained=False)."""
-    if name == "m0":
-        import joblib  # our own run output, not an untrusted file
-        return joblib.load(run / "best.joblib"), True
+    spec = get_version(name)
+    if spec["kind"] == "logistic":
+        if (run / "best.joblib").exists():
+            import joblib  # our own run output, not an untrusted file
+            return joblib.load(run / "best.joblib"), True
+        return untrained_logistic(spec, len(classes)), False
     model = build_model(name, len(classes), pretrained=False)
     checkpoint = run / "best.pt"
     if checkpoint.exists():
@@ -82,8 +111,9 @@ def load_model(name, run, classes):
 
 def latency_ms(name, model, images, warmup=3):
     transform = preprocessing(name, getattr(model, "input_normalization", None))
-    if name == "m0":
-        predict = lambda image: model.predict(transform(image).numpy().reshape(1, -1))
+    spec = get_version(name)
+    if spec["kind"] == "logistic":
+        predict = lambda image: model.predict(logistic_inputs(spec, transform(image).unsqueeze(0)))
     else:
         predict = lambda image: model(transform(image).unsqueeze(0)).argmax(1)
     times = []

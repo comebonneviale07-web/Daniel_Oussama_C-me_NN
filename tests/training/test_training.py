@@ -23,7 +23,7 @@ class ExperimentTests(unittest.TestCase):
                 folder.mkdir(parents=True)
                 for index in range(20):
                     Image.new("RGB", (16, 16), (label * 40, index * 10, 0)).save(folder / f"{index}.png")
-            for name in ("m0", "m1", "m2", "m2_fixed"):
+            for name in ("m0", "m1", "m2", "m2_fixed", "m0_features", "m1_tuned", "m2_regularised"):
                 result = subprocess.run([sys.executable, "-m", "src.training",
                                 "--model", name, "--data", str(root / "images"),
                                 "--split", str(root / "split.json"), "--output", str(root / "runs"),
@@ -40,9 +40,9 @@ class ExperimentTests(unittest.TestCase):
                 self.assertTrue((run / "confusion_matrix.png").exists())
                 self.assertIn("Version :", (run / "README.md").read_text(encoding="utf-8"))
                 self.assertIn("Résultats", (run / "README.md").read_text(encoding="utf-8"))
-                checkpoint = "best.joblib" if name == "m0" else "best.pt"
+                checkpoint = "best.joblib" if name.startswith("m0") else "best.pt"
                 self.assertTrue((run / checkpoint).exists())
-                if name in ("m2", "m2_fixed"):
+                if name in ("m2", "m2_fixed", "m2_regularised"):
                     gradients = json.loads((run / "gradients.json").read_text())
                     self.assertEqual(len(gradients[0]), 7)  # epoch and six linear weight matrices
 

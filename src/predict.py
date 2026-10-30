@@ -14,9 +14,12 @@ from pathlib import Path
 import torch
 from PIL import Image
 
+from src.features import logistic_inputs
 from src.training import ROOT, build_model, preprocessing
+from src.versions import get_version
 
-PREFERENCE = ("m3", "m3_frozen", "m2_fixed", "m1", "m0", "m2")
+PREFERENCE = ("m3_augmented", "m3", "m3_frozen_augmented", "m3_frozen", "m2_regularised", "m2_fixed", "m1_tuned",
+              "m0_features", "m1", "m0", "m2")
 
 
 def default_run(runs_dir):
@@ -35,7 +38,7 @@ def load_run(run):
     """(model, model name, class names) from a run folder of experiments.py."""
     config = json.loads((run / "config.json").read_text(encoding="utf-8"))
     name = config["model"]
-    if name == "m0":
+    if get_version(name)["kind"] == "logistic":
         import joblib  # joblib files can execute code: only load runs you produced yourself
         return joblib.load(run / "best.joblib"), name, config["classes"]
     checkpoint = torch.load(run / "best.pt", map_location="cpu", weights_only=True)
@@ -44,7 +47,7 @@ def load_run(run):
     model = build_model(name, len(checkpoint["classes"]), pretrained=False)
     model.load_state_dict(checkpoint["state_dict"])
     model.input_normalization = checkpoint.get("input_normalization")
-    if name == "m2_fixed":
+    if get_version(name)["normalization"] == "training_channel":
         preprocessing(name, model.input_normalization)  # Fail clearly if required metadata is missing.
     return model.eval(), name, checkpoint["classes"]
 
@@ -52,8 +55,9 @@ def load_run(run):
 def predict(model, name, classes, image, top=3):
     """[(style, probability)] for one PIL image, most likely first."""
     x = preprocessing(name, getattr(model, "input_normalization", None))(image.convert("RGB")).unsqueeze(0)
-    if name == "m0":
-        probabilities = torch.tensor(model.predict_proba(x.numpy().reshape(1, -1))[0])
+    spec = get_version(name)
+    if spec["kind"] == "logistic":
+        probabilities = torch.tensor(model.predict_proba(logistic_inputs(spec, x))[0])
     else:
         with torch.inference_mode():
             probabilities = torch.softmax(model(x), dim=1)[0]

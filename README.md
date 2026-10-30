@@ -26,6 +26,8 @@ source .venv/Scripts/activate
 python main.py train --model m2_fixed
 python main.py predict photo.jpg
 python main.py benchmark
+python main.py compare --run-a <run> --run-b <run>
+python main.py robustness --runs <run> <run>
 python main.py diagnose --experiment prototype
 python main.py backup
 python -m unittest discover -s tests -v
@@ -35,9 +37,20 @@ Pour installer : `py -3.13 -m venv .venv`, activer l'environnement, puis
 `python -m pip install -r requirements-lock.txt`. Les options de chaque commande
 sont accessibles avec `python main.py train --help`, par exemple.
 
-Mod?les : `m0`, `m1`, `m2` (sigmoid historique), `m2_fixed` (ReLU corrig?),
-`m3_frozen`, `m3` (fine-tuning). Ne pas relancer tous les entra?nements pour
-consulter leurs r?sultats. `--lr`, `--epochs`, `--threads`, `--seed` restent disponibles.
+Modèles : `m0` (régression logistique sur pixels), `m0_features` (régression logistique sur
+couleurs, contours et texture), `m1` et `m1_tuned` (MLP une couche), `m2` (sigmoïdes, échec conservé),
+`m2_fixed` (ReLU corrigé), `m2_regularised`, `m3_frozen`, `m3_frozen_augmented`, `m3` (fine-tuning) et
+`m3_augmented` (fine-tuning + augmentation). Ne pas relancer tous les entraînements pour consulter leurs
+résultats. `--lr`, `--epochs`, `--threads`, `--seed` restent disponibles.
+
+## Résultats et recommandation
+
+Sur les 225 images de test (même split pour tous) : le meilleur modèle sans réseau pré-entraîné est
+`m0_features` (50,7 %) ; les ResNet-18 atteignent 70,7 à 83,1 % (`m3` : 83,1 %). Pour la borne, `m3_augmented`
+(79,1 % sur scans propres, différence non significative avec `m3`) résiste significativement mieux aux photos
+de visiteur simulées (38,7 % contre 30,7 %, p = 0,001). Comparer deux runs : `python main.py compare`.
+Robustesse : `python main.py robustness`. Tableau complet, tests statistiques et limites :
+[docs/RESULTS.md](docs/RESULTS.md).
 
 ## O? regarder
 

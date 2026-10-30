@@ -1,0 +1,26 @@
+{
+  "id": "m0_features",
+  "version": "m0/v2_features",
+  "kind": "logistic",
+  "input_size": 64,
+  "normalization": "unit",
+  "features": "handcrafted",
+  "standardize": true,
+  "selection_metric": "val_macro_f1",
+  "epochs": 1,
+  "lr": 0.001,
+  "c_candidates": [
+    0.0001,
+    0.0003,
+    0.001,
+    0.003,
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    1.0,
+    3.0,
+    10.0
+  ],
+  "max_iter": 5000
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "epoch": 1,
+    "train_loss": 1.543922138668242,
+    "train_accuracy": 0.3161904761904762,
+    "val_loss": 1.506573940647973,
+    "val_accuracy": 0.3422222222222222,
+    "val_macro_f1": 0.31198873267743055,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 2,
+    "train_loss": 1.3966309801737467,
+    "train_accuracy": 0.43333333333333335,
+    "val_loss": 1.4865171212620205,
+    "val_accuracy": 0.38222222222222224,
+    "val_macro_f1": 0.36329608113307016,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 3,
+    "train_loss": 1.334157167162214,
+    "train_accuracy": 0.4857142857142857,
+    "val_loss": 1.4442913458082411,
+    "val_accuracy": 0.4444444444444444,
+    "val_macro_f1": 0.42947429666954823,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 4,
+    "train_loss": 1.2612206193378994,
+    "train_accuracy": 0.5561904761904762,
+    "val_loss": 1.4322731722725763,
+    "val_accuracy": 0.4,
+    "val_macro_f1": 0.3863916212995882,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 5,
+    "train_loss": 1.2388718677702404,
+    "train_accuracy": 0.56,
+    "val_loss": 1.4235978098710378,
+    "val_accuracy": 0.4177777777777778,
+    "val_macro_f1": 0.39859056766825957,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 6,
+    "train_loss": 1.1770503548213413,
+    "train_accuracy": 0.599047619047619,
+    "val_loss": 1.419472471078237,
+    "val_accuracy": 0.4266666666666667,
+    "val_macro_f1": 0.4188383679016291,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 7,
+    "train_loss": 1.1345081270308721,
+    "train_accuracy": 0.6333333333333333,
+    "val_loss": 1.3934649823771583,
+    "val_accuracy": 0.44,
+    "val_macro_f1": 0.4286606575554641,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 8,
+    "train_loss": 1.0870399595442273,
+    "train_accuracy": 0.6638095238095238,
+    "val_loss": 1.4021973053614298,
+    "val_accuracy": 0.4666666666666667,
+    "val_macro_f1": 0.4612008413932334,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 9,
+    "train_loss": 1.0261609225046067,
+    "train_accuracy": 0.72,
+    "val_loss": 1.406634936730067,
+    "val_accuracy": 0.4311111111111111,
+    "val_macro_f1": 0.42099804440624566,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 10,
+    "train_loss": 0.986682441802252,
+    "train_accuracy": 0.7295238095238096,
+    "val_loss": 1.3826866400241853,
+    "val_accuracy": 0.4577777777777778,
+    "val_macro_f1": 0.44744617847138846,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 11,
+    "train_loss": 0.9521842399097624,
+    "train_accuracy": 0.7342857142857143,
+    "val_loss": 1.379452908039093,
+    "val_accuracy": 0.4533333333333333,
+    "val_macro_f1": 0.44719458627106085,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 12,
+    "train_loss": 0.9076098217282976,
+    "train_accuracy": 0.7657142857142857,
+    "val_loss": 1.4123189118173387,
+    "val_accuracy": 0.4577777777777778,
+    "val_macro_f1": 0.4536098324464142,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 13,
+    "train_loss": 0.8606130006199791,
+    "train_accuracy": 0.7780952380952381,
+    "val_loss": 1.3742146184709336,
+    "val_accuracy": 0.4622222222222222,
+    "val_macro_f1": 0.45595464041696543,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 14,
+    "train_loss": 0.8290866956256685,
+    "train_accuracy": 0.8076190476190476,
+    "val_loss": 1.4151740381452773,
+    "val_accuracy": 0.41333333333333333,
+    "val_macro_f1": 0.404793975190403,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 15,
+    "train_loss": 0.7897878498122806,
+    "train_accuracy": 0.8114285714285714,
+    "val_loss": 1.4209967878129748,
+    "val_accuracy": 0.4177777777777778,
+    "val_macro_f1": 0.4018083532755953,
+    "val_predicted_classes": 5
+  },
+  {
+    "epoch": 16,
+    "train_loss": 0.7512582404272897,
+    "train_accuracy": 0.82,
+    "val_loss": 1.4048908554845385,
+    "val_accuracy": 0.44,
+    "val_macro_f1": 0.4276154635337697,
+    "val_predicted_classes": 5
+  }
+]

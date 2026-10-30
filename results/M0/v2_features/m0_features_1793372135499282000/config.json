@@ -1,0 +1,62 @@
+{
+  "model": "m0_features",
+  "data": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\data\\wikiart_style5",
+  "split": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\data\\splits\\style5.json",
+  "output": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\results\\M0\\v2_features",
+  "epochs": 1,
+  "batch_size": 32,
+  "lr": 0.001,
+  "seed": 42,
+  "threads": 8,
+  "device": "cpu",
+  "split_only": false,
+  "model_version": "m0/v2_features",
+  "version_settings": {
+    "id": "m0_features",
+    "version": "m0/v2_features",
+    "kind": "logistic",
+    "input_size": 64,
+    "normalization": "unit",
+    "features": "handcrafted",
+    "standardize": true,
+    "selection_metric": "val_macro_f1",
+    "epochs": 1,
+    "lr": 0.001,
+    "c_candidates": [
+      0.0001,
+      0.0003,
+      0.001,
+      0.003,
+      0.01,
+      0.03,
+      0.1,
+      0.3,
+      1.0,
+      3.0,
+      10.0
+    ],
+    "max_iter": 5000
+  },
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "input_normalization": null,
+  "activation": null,
+  "dropout": null,
+  "torch_version": "2.7.0+cpu",
+  "numpy_version": "2.2.3",
+  "python_version": "3.13.1",
+  "package_versions": {
+    "torch": "2.7.0",
+    "torchvision": "0.22.0+cpu",
+    "scikit-learn": "1.7.0",
+    "numpy": "2.2.3",
+    "pillow": "11.1.0",
+    "matplotlib": "3.10.0"
+  },
+  "input_size": 64
+}
