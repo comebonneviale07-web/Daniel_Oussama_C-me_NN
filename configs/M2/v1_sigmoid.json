@@ -1,0 +1,5 @@
+{
+  "id": "m2", "version": "m2/v1_sigmoid", "kind": "mlp", "input_size": 64,
+  "hidden_sizes": [512, 256, 128, 64, 32], "activation": "sigmoid", "dropout": 0.3,
+  "normalization": "unit", "epochs": 15, "lr": 0.01
+}

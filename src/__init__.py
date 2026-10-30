@@ -1,0 +1,1 @@
+"""Museum AI project package."""

@@ -1,0 +1,47 @@
+{
+  "model": "m2_fixed",
+  "data": "C:\\Users\\DANIEL\\Documents\\Daniel\\1. ALBERT SCHOOL-PSL\\2nd YEAR\\Projet Neural Networks\\Daniel_Oussama_C-me_NN\\data\\wikiart_style5",
+  "split": "C:\\Users\\DANIEL\\Documents\\Daniel\\1. ALBERT SCHOOL-PSL\\2nd YEAR\\Projet Neural Networks\\Daniel_Oussama_C-me_NN\\splits\\style5.json",
+  "output": "C:\\Users\\DANIEL\\Documents\\Daniel\\1. ALBERT SCHOOL-PSL\\2nd YEAR\\Projet Neural Networks\\Daniel_Oussama_C-me_NN\\runs",
+  "epochs": 20,
+  "batch_size": 32,
+  "lr": 0.0001,
+  "seed": 42,
+  "threads": 2,
+  "device": "cpu",
+  "split_only": false,
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "input_normalization": {
+    "mean": [
+      0.5471431336850863,
+      0.499235984659303,
+      0.43746695592635326
+    ],
+    "std": [
+      0.2632974281129757,
+      0.25445071610516967,
+      0.2512731548001593
+    ],
+    "source": "training split only"
+  },
+  "activation": "relu",
+  "dropout": 0.0,
+  "torch_version": "2.15.0+cpu",
+  "numpy_version": "2.5.4",
+  "python_version": "3.13.7",
+  "package_versions": {
+    "torch": "2.15.0",
+    "torchvision": "0.29.2",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "pillow": "13.0.0",
+    "matplotlib": "3.11.2"
+  },
+  "input_size": 64
+}

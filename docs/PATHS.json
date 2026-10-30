@@ -1,0 +1,18 @@
+{
+  "runs/benchmark_1793358411979475300": "results/benchmarks/benchmark_1793358411979475300",
+  "runs/diagnosis_init_1793354031511055000": "results/diagnostics/diagnosis_init_1793354031511055000",
+  "runs/diagnosis_lr_1793353972337064700": "results/diagnostics/diagnosis_lr_1793353972337064700",
+  "runs/diagnosis_normalisation_1793354179974204200": "results/diagnostics/diagnosis_normalisation_1793354179974204200",
+  "runs/diagnosis_prototype_1793353811085666600": "results/diagnostics/diagnosis_prototype_1793353811085666600",
+  "runs/diagnosis_regularisation_1793355497162975600": "results/diagnostics/diagnosis_regularisation_1793355497162975600",
+  "runs/m3_frozen_1793300573210941500": "results/M3/v1_frozen/m3_frozen_1793300573210941500",
+  "runs/m3_1793355952561843000": "results/M3/v2_finetuned/m3_1793355952561843000",
+  "runs/m2_1793300452973140000": "results/M2/v1_sigmoid/m2_1793300452973140000",
+  "runs/m2_fixed_1793368290720728000": "results/M2/v2_relu/m2_fixed_1793368290720728000",
+  "runs/m2_fixed_1793368666087080100": "results/M2/v2_relu/m2_fixed_1793368666087080100",
+  "runs/m1_1793299518786019100": "results/M1/v1_baseline/m1_1793299518786019100",
+  "runs/m0_1793300405327349300": "results/M0/v1_logistic/m0_1793300405327349300",
+  "runs/m0_1793355775110682900": "results/M0/v1_logistic/m0_1793355775110682900",
+  "runs/m0_1793364092702299800": "results/M0/v1_logistic/m0_1793364092702299800",
+  "runs/m0_1793367969029599200": "results/M0/v1_logistic/m0_1793367969029599200"
+}

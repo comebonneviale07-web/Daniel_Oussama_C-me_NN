@@ -1,0 +1,4 @@
+{
+  "id": "m3_frozen", "version": "m3/v1_frozen", "kind": "resnet18", "input_size": 224,
+  "normalization": "imagenet", "frozen": true, "epochs": 10, "lr": 0.001
+}

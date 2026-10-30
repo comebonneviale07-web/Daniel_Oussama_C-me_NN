@@ -2,11 +2,11 @@
 __pycache__/
 *.pyc
 # Keep small experiment reports; trained weights stay local.
-runs/*
-!runs/*/
-runs/*/*
-!runs/*/*.json
-!runs/*/*.csv
-!runs/*/*.png
-!runs/*/*.md
-backups/
+results/**
+!results/**/
+!results/**/*.json
+!results/**/*.csv
+!results/**/*.png
+!results/**/*.md
+archives/backups/
+archives/previous_layout/

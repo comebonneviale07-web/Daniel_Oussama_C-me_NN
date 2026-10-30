@@ -1,0 +1,5 @@
+{
+  "id": "m1", "version": "m1/v1_baseline", "kind": "mlp", "input_size": 64,
+  "hidden_sizes": [256], "activation": "relu", "dropout": 0.0,
+  "normalization": "unit", "epochs": 3, "lr": 0.001
+}

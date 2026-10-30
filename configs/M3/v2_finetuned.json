@@ -1,0 +1,4 @@
+{
+  "id": "m3", "version": "m3/v2_finetuned", "kind": "resnet18", "input_size": 224,
+  "normalization": "imagenet", "frozen": false, "epochs": 10, "lr": 0.0001
+}

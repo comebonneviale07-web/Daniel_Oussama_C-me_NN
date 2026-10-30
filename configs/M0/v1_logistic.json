@@ -1,0 +1,5 @@
+{
+  "id": "m0", "version": "m0/v1_logistic", "kind": "logistic",
+  "input_size": 64, "normalization": "unit", "epochs": 1, "lr": 0.001,
+  "c_candidates": [0.01, 0.1, 1.0], "max_iter": 1000
+}
