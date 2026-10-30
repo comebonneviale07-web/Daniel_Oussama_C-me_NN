@@ -84,9 +84,16 @@ python make_wikiart_subset.py --label style --classes Impressionism Baroque Cubi
 See `data/wikiart_style5/subset_info.json` for the pinned source revision and settings.
 The dataset builder documents image rights and coursework usage restrictions.
 
+## Failure diagnosis (deliverable 2)
+
+See [DIAGNOSIS.md](DIAGNOSIS.md): `diagnose.py` explains why M2 predicts a single class (saturated sigmoids,
+first-layer gradient 10^-8 times the last, triggered by lr 1e-2), shows that four changes are needed together to
+repair it, and measures the effect of the learning rate, the initialisation, input normalisation and
+regularisation (3 seeds) on M1.
+
 ## Remaining delivery work
 
-Run and inspect corrected experiments, investigate M2 gradients, benchmark CPU inference
+Run and inspect corrected experiments, benchmark CPU inference
 latency/RAM/model size, and write a measured comparison. Frozen ResNet feature caching,
 inference for uploaded images, visual/text retrieval, and a Streamlit guide remain future
 work. No museum interface or deployment benchmark is implemented yet.

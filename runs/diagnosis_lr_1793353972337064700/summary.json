@@ -1,0 +1,131 @@
+{
+  "experiment": "lr",
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "elapsed_seconds": 158.36239099991508,
+  "runs": [
+    {
+      "run": "Adam lr=1e-05",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.544482219786871,
+      "final_train_loss": 0.8182766700926282,
+      "final_train_accuracy": 0.8057142857142857,
+      "best_val_macro_f1": 0.4028767154957623,
+      "best_val_accuracy": 0.42222222685813904,
+      "best_epoch": 19,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 3.6486989516480053,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.6537152528762817,
+          "zero": 0.4861631989479065,
+          "constant_units": 0.0
+        }
+      ]
+    },
+    {
+      "run": "Adam lr=0.0001",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6454780256180537,
+      "final_train_loss": 0.1427936673732031,
+      "final_train_accuracy": 0.9780952380952381,
+      "best_val_macro_f1": 0.4208941762916871,
+      "best_val_accuracy": 0.4444444477558136,
+      "best_epoch": 3,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.1019015250798916,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8771353960037231,
+          "zero": 0.49276041984558105,
+          "constant_units": 0.0
+        }
+      ]
+    },
+    {
+      "run": "Adam lr=0.001",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 4.4817780612763904,
+      "final_train_loss": 0.27369948181368053,
+      "final_train_accuracy": 0.92,
+      "best_val_macro_f1": 0.37460511546534364,
+      "best_val_accuracy": 0.3911111056804657,
+      "best_epoch": 12,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.195660951838616,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9660416841506958,
+          "zero": 0.535121500492096,
+          "constant_units": 0.0
+        }
+      ]
+    },
+    {
+      "run": "Adam lr=0.01",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 55.91034070332845,
+      "final_train_loss": 12.690672338576544,
+      "final_train_accuracy": 0.7876190476190477,
+      "best_val_macro_f1": 0.3706926075865296,
+      "best_val_accuracy": 0.3777777850627899,
+      "best_epoch": 4,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.037459753377715996,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9960243105888367,
+          "zero": 0.6027083396911621,
+          "constant_units": 0.0
+        }
+      ]
+    },
+    {
+      "run": "Adam lr=0.1",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 3285.5416335478285,
+      "final_train_loss": 1784.1232728794644,
+      "final_train_accuracy": 0.7361904761904762,
+      "best_val_macro_f1": 0.33538485360190784,
+      "best_val_accuracy": 0.35111111402511597,
+      "best_epoch": 9,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.039901098326209486,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9995659589767456,
+          "zero": 0.6182985901832581,
+          "constant_units": 0.0
+        }
+      ]
+    },
+    {
+      "run": "SGD lr=1",
+      "epochs": 1,
+      "diverged": true,
+      "first_epoch_loss": NaN,
+      "final_train_loss": NaN,
+      "final_train_accuracy": 0.18857142857142858,
+      "best_val_macro_f1": 0.06666666666666667,
+      "best_val_accuracy": 0.20000000298023224,
+      "best_epoch": 1,
+      "final_val_predicted_classes": 1,
+      "first_to_last_layer_gradient_ratio": NaN
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "experiment": "normalisation",
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "elapsed_seconds": 147.47864530002698,
+  "runs": [
+    {
+      "run": "inputs raw, adam",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 43.722233848571776,
+      "final_train_loss": 2.097117107028053,
+      "final_train_accuracy": 0.4685714285714286,
+      "best_val_macro_f1": 0.26518883507642443,
+      "best_val_accuracy": 0.2844444513320923,
+      "best_epoch": 12,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 2.0094621240633854,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9999826550483704,
+          "zero": 0.956944465637207,
+          "constant_units": 0.9453125
+        }
+      ]
+    },
+    {
+      "run": "inputs raw, sgd",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 171496.02177942844,
+      "final_train_loss": 1.6098544722511654,
+      "final_train_accuracy": 0.2,
+      "best_val_macro_f1": 0.06666666666666667,
+      "best_val_accuracy": 0.20000000298023224,
+      "best_epoch": 1,
+      "final_val_predicted_classes": 1,
+      "first_to_last_layer_gradient_ratio": null,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 1.0,
+          "zero": 1.0,
+          "constant_units": 1.0
+        }
+      ]
+    },
+    {
+      "run": "inputs unit, adam",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6213223638988676,
+      "final_train_loss": 1.2904626235507783,
+      "final_train_accuracy": 0.48857142857142855,
+      "best_val_macro_f1": 0.37420871505755227,
+      "best_val_accuracy": 0.3822222352027893,
+      "best_epoch": 12,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.8487609884968496,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9691666960716248,
+          "zero": 0.816857635974884,
+          "constant_units": 0.78515625
+        }
+      ]
+    },
+    {
+      "run": "inputs unit, sgd",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6206277066185362,
+      "final_train_loss": 1.411821163041251,
+      "final_train_accuracy": 0.3514285714285714,
+      "best_val_macro_f1": 0.2593823668081094,
+      "best_val_accuracy": 0.3333333432674408,
+      "best_epoch": 7,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 3.416722650301544,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9996180534362793,
+          "zero": 0.9983680844306946,
+          "constant_units": 0.9765625
+        }
+      ]
+    },
+    {
+      "run": "inputs standard, adam",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6454780256180537,
+      "final_train_loss": 0.1427936673732031,
+      "final_train_accuracy": 0.9780952380952381,
+      "best_val_macro_f1": 0.4208941762916871,
+      "best_val_accuracy": 0.4444444477558136,
+      "best_epoch": 3,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.1019015250798916,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8771353960037231,
+          "zero": 0.49276041984558105,
+          "constant_units": 0.0
+        }
+      ]
+    },
+    {
+      "run": "inputs standard, sgd",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.8110796331223988,
+      "final_train_loss": 20035.501354166667,
+      "final_train_accuracy": 0.38666666666666666,
+      "best_val_macro_f1": 0.3055261656219296,
+      "best_val_accuracy": 0.35111111402511597,
+      "best_epoch": 1,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.0090562950667235,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9983680844306946,
+          "zero": 0.5995312333106995,
+          "constant_units": 0.0
+        }
+      ]
+    }
+  ]
+}

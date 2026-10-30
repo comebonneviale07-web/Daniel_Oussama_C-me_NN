@@ -1,0 +1,140 @@
+{
+  "experiment": "init",
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "elapsed_seconds": 57.41308799991384,
+  "runs": [
+    {
+      "run": "init=he",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 5.582716340791611,
+      "final_train_loss": 0.6400196628343491,
+      "final_train_accuracy": 0.7561904761904762,
+      "best_val_macro_f1": 0.39049384126349496,
+      "best_val_accuracy": 0.4000000059604645,
+      "best_epoch": 12,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 4.230011499469997,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9489409923553467,
+          "zero": 0.5330034494400024,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 2,
+          "saturated": 0.9831597208976746,
+          "zero": 0.9120312333106995,
+          "constant_units": 0.26171875
+        },
+        {
+          "layer": 3,
+          "saturated": 0.9321701526641846,
+          "zero": 0.800815999507904,
+          "constant_units": 0.01953125
+        },
+        {
+          "layer": 4,
+          "saturated": 0.9161978960037231,
+          "zero": 0.8159201145172119,
+          "constant_units": 0.0703125
+        },
+        {
+          "layer": 5,
+          "saturated": 0.964392364025116,
+          "zero": 0.9412326216697693,
+          "constant_units": 0.34765625
+        }
+      ],
+      "gradients_at_init": {
+        "1.weight": 11.447474479675293,
+        "3.weight": 2.0000720024108887,
+        "5.weight": 2.505946397781372,
+        "7.weight": 3.1909635066986084,
+        "9.weight": 3.8023743629455566,
+        "11.weight": 4.032901763916016
+      }
+    },
+    {
+      "run": "init=small",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6100994244075957,
+      "final_train_loss": 1.6098391180946714,
+      "final_train_accuracy": 0.2,
+      "best_val_macro_f1": 0.176,
+      "best_val_accuracy": 0.2800000011920929,
+      "best_epoch": 15,
+      "final_val_predicted_classes": 1,
+      "first_to_last_layer_gradient_ratio": 0.30053207563487555,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.6626909971237183,
+          "zero": 0.4937152862548828,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 2,
+          "saturated": 0.5250173807144165,
+          "zero": 0.4907291531562805,
+          "constant_units": 0.00390625
+        },
+        {
+          "layer": 3,
+          "saturated": 0.7754166722297668,
+          "zero": 0.5060069561004639,
+          "constant_units": 0.06640625
+        },
+        {
+          "layer": 4,
+          "saturated": 1.0,
+          "zero": 0.4486111104488373,
+          "constant_units": 0.72265625
+        },
+        {
+          "layer": 5,
+          "saturated": 1.0,
+          "zero": 0.7334548830986023,
+          "constant_units": 1.0
+        }
+      ],
+      "gradients_at_init": {
+        "1.weight": 0.0001479480997659266,
+        "3.weight": 0.00014956302766222507,
+        "5.weight": 0.00016038870671764016,
+        "7.weight": 0.00016455768491141498,
+        "9.weight": 0.00015365812578238547,
+        "11.weight": 0.00012993077689316124
+      }
+    },
+    {
+      "run": "init=large",
+      "epochs": 1,
+      "diverged": true,
+      "first_epoch_loss": NaN,
+      "final_train_loss": NaN,
+      "final_train_accuracy": 0.19714285714285715,
+      "best_val_macro_f1": 0.06666666666666667,
+      "best_val_accuracy": 0.20000000298023224,
+      "best_epoch": 1,
+      "final_val_predicted_classes": 1,
+      "first_to_last_layer_gradient_ratio": NaN,
+      "gradients_at_init": {
+        "1.weight": 3231922.5,
+        "3.weight": 4462787.5,
+        "5.weight": 6033886.5,
+        "7.weight": 8022022.5,
+        "9.weight": 9825737.0,
+        "11.weight": 10573601.0
+      }
+    }
+  ]
+}

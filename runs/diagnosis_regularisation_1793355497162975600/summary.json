@@ -1,0 +1,343 @@
+{
+  "experiment": "regularisation",
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "elapsed_seconds": 1315.0174997998402,
+  "runs": [
+    {
+      "run": "none",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6454780256180537,
+      "final_train_loss": 0.05103617546104249,
+      "final_train_accuracy": 0.9904761904761905,
+      "best_val_macro_f1": 0.4208941762916871,
+      "best_val_accuracy": 0.4444444477558136,
+      "best_epoch": 3,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.9989040651450023,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8974131941795349,
+          "zero": 0.49225693941116333,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 42
+    },
+    {
+      "run": "none",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6146484704244704,
+      "final_train_loss": 0.039956188918579195,
+      "final_train_accuracy": 0.9923809523809524,
+      "best_val_macro_f1": 0.39655387675333,
+      "best_val_accuracy": 0.3955555558204651,
+      "best_epoch": 4,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.1810711776100675,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8886284828186035,
+          "zero": 0.4926736056804657,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 43
+    },
+    {
+      "run": "none",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.5745652369090488,
+      "final_train_loss": 0.04870458960533142,
+      "final_train_accuracy": 0.9942857142857143,
+      "best_val_macro_f1": 0.426296740192271,
+      "best_val_accuracy": 0.4266666769981384,
+      "best_epoch": 5,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.1528737582284625,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8857812285423279,
+          "zero": 0.48890626430511475,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 44
+    },
+    {
+      "run": "dropout .5",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.7068071551550001,
+      "final_train_loss": 0.180498147663616,
+      "final_train_accuracy": 0.9504761904761905,
+      "best_val_macro_f1": 0.38733872180280926,
+      "best_val_accuracy": 0.40888887643814087,
+      "best_epoch": 2,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.5921553315921455,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8451910018920898,
+          "zero": 0.5071007013320923,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 42
+    },
+    {
+      "run": "dropout .5",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6973175366719564,
+      "final_train_loss": 0.17501508871714275,
+      "final_train_accuracy": 0.9580952380952381,
+      "best_val_macro_f1": 0.4074407592806989,
+      "best_val_accuracy": 0.4266666769981384,
+      "best_epoch": 4,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.6211992919398919,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8450868129730225,
+          "zero": 0.5077951550483704,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 43
+    },
+    {
+      "run": "dropout .5",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6678554930005756,
+      "final_train_loss": 0.2031694263503665,
+      "final_train_accuracy": 0.9457142857142857,
+      "best_val_macro_f1": 0.3842690501439176,
+      "best_val_accuracy": 0.3911111056804657,
+      "best_epoch": 30,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.674022450258537,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8414236307144165,
+          "zero": 0.5053472518920898,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 44
+    },
+    {
+      "run": "weight decay 1",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6449193909054711,
+      "final_train_loss": 0.06180722521884101,
+      "final_train_accuracy": 0.9895238095238095,
+      "best_val_macro_f1": 0.4180852158404975,
+      "best_val_accuracy": 0.4399999976158142,
+      "best_epoch": 3,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.9627801887090409,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8944618105888367,
+          "zero": 0.4915972352027893,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 42
+    },
+    {
+      "run": "weight decay 1",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6141556331089564,
+      "final_train_loss": 0.05334345015031951,
+      "final_train_accuracy": 0.9923809523809524,
+      "best_val_macro_f1": 0.40440796102899473,
+      "best_val_accuracy": 0.40444445610046387,
+      "best_epoch": 4,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.121684600934583,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8839583396911621,
+          "zero": 0.4914236068725586,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 43
+    },
+    {
+      "run": "weight decay 1",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.5735837416421798,
+      "final_train_loss": 0.058518731594085695,
+      "final_train_accuracy": 0.9942857142857143,
+      "best_val_macro_f1": 0.40481384959046907,
+      "best_val_accuracy": 0.42222222685813904,
+      "best_epoch": 16,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.1071297307316434,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8838889002799988,
+          "zero": 0.48875001072883606,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 44
+    },
+    {
+      "run": "flip augmentation",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.580476960227603,
+      "final_train_loss": 0.04502489952104432,
+      "final_train_accuracy": 0.9909523809523809,
+      "best_val_macro_f1": 0.42251576019985937,
+      "best_val_accuracy": 0.4355555474758148,
+      "best_epoch": 2,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.8940924532507978,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9194965362548828,
+          "zero": 0.496319442987442,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 42
+    },
+    {
+      "run": "flip augmentation",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.5554623883111136,
+      "final_train_loss": 0.0813213811885743,
+      "final_train_accuracy": 0.9761904761904762,
+      "best_val_macro_f1": 0.4408570877943297,
+      "best_val_accuracy": 0.448888897895813,
+      "best_epoch": 31,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.8602971679177334,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9185590147972107,
+          "zero": 0.4870312511920929,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 43
+    },
+    {
+      "run": "flip augmentation",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.5402715701148624,
+      "final_train_loss": 0.044668935445092976,
+      "final_train_accuracy": 0.9923809523809524,
+      "best_val_macro_f1": 0.4500255516840882,
+      "best_val_accuracy": 0.46222221851348877,
+      "best_epoch": 8,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.9199838149515752,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9152604341506958,
+          "zero": 0.4950520694255829,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 44
+    },
+    {
+      "run": "dropout .5 + flip augmentation",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6567872742244176,
+      "final_train_loss": 0.24611877191634404,
+      "final_train_accuracy": 0.9295238095238095,
+      "best_val_macro_f1": 0.42134466617393446,
+      "best_val_accuracy": 0.4266666769981384,
+      "best_epoch": 16,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.3943974260441083,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8677951097488403,
+          "zero": 0.5181597471237183,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 42
+    },
+    {
+      "run": "dropout .5 + flip augmentation",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6493063445318312,
+      "final_train_loss": 0.26046785246758236,
+      "final_train_accuracy": 0.9238095238095239,
+      "best_val_macro_f1": 0.44343815378229534,
+      "best_val_accuracy": 0.4577777683734894,
+      "best_epoch": 16,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.4050966747027787,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8694097399711609,
+          "zero": 0.5142014026641846,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 43
+    },
+    {
+      "run": "dropout .5 + flip augmentation",
+      "epochs": 40,
+      "diverged": false,
+      "first_epoch_loss": 1.6523094068254742,
+      "final_train_loss": 0.2743187357698168,
+      "final_train_accuracy": 0.9114285714285715,
+      "best_val_macro_f1": 0.4391112612993157,
+      "best_val_accuracy": 0.4444444477558136,
+      "best_epoch": 10,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 1.4085335673070996,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.8691840171813965,
+          "zero": 0.515625,
+          "constant_units": 0.0
+        }
+      ],
+      "seed": 44
+    }
+  ]
+}
