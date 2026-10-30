@@ -10,6 +10,25 @@ ci-dessous d?crivent les ?tapes pr?c?dentes ; le README racine est la r?f?rence 
 
 # Historique des modèles et de l'organisation
 
+## 30 octobre 2026 — versions améliorées et comparaison statistique
+
+Nouvelles options de configuration (valeurs par défaut identiques aux anciennes versions, qui ne changent
+pas) : augmentation sur le train seulement, AdamW, scheduler cosinus, label smoothing, choix du checkpoint sur
+le macro F1 de validation avec arrêt précoce, BatchNorm1d pour les MLP, features calculées à la main pour les
+modèles scikit-learn. Nouvelle commande `python main.py compare` (test de McNemar exact sur les mêmes images
+de test).
+
+| Nouvelle version | Référence | Test (référence → nouvelle) | McNemar |
+| --- | --- | --- | --- |
+| M0 v2_features (`m0_features`) | M0 v1 | 37,78 % → **50,67 %** | p = 0,004, significatif |
+| M1 v2_tuned (`m1_tuned`) | M1 v1 | 30,22 % → 37,33 % | p = 0,081, non significatif |
+| M2 v3_regularised (`m2_regularised`) | M2 v2 | 41,78 % → 36,44 % | p = 0,16, non significatif |
+| M3 v3_augmented (`m3_augmented`) | M3 v2 | en cours | |
+| M3 v4_frozen_augmented (`m3_frozen_augmented`) | M3 v1 | en cours | |
+
+Au passage : M3 v1 gelé contre M3 v2 fine-tuné, 75,11 % → 83,11 %, p = 0,006 (gain du fine-tuning significatif).
+Détails et motivations dans les README de `configs/M0` à `configs/M3`.
+
 ## 30 octobre 2026 — rangement sans réentraînement
 
 - Tests déplacés dans `tests/`, documents dans `docs/`, utilitaires dans `tools/`.

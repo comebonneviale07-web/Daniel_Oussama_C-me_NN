@@ -1,0 +1,12 @@
+{
+  "run_a": "m2_fixed_1793368290720728000",
+  "run_b": "m2_regularised_1793377157734286200",
+  "test_images": 225,
+  "accuracy_a": 0.4177777777777778,
+  "accuracy_b": 0.36444444444444446,
+  "both_right": 57,
+  "only_a_right": 37,
+  "only_b_right": 25,
+  "both_wrong": 106,
+  "mcnemar_exact_p_value": 0.16188140552559763
+}

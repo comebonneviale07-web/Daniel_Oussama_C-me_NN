@@ -32,3 +32,21 @@ ensuite (97,33 % train ? l'?poque 20). Les statistiques sont sauvegard?es avec l
 python main.py train --model m2        # reproduire l'?chec
 python main.py train --model m2_fixed  # version corrig?e
 ```
+
+## Version v3_regularised (`m2_regularised`)
+
+Part de v2_relu (mêmes largeurs, ReLU, sans dropout, entrées standardisées, lr 0,0001) et vise son
+surapprentissage (97 % au train) : BatchNorm1d après chaque couche cachée, AdamW avec weight decay 0,01,
+augmentation par miroir (train seulement), checkpoint choisi sur le **macro F1 de validation**, arrêt après
+8 époques sans amélioration (30 au maximum). Réglages dans `v3_regularised.json`.
+
+```bash
+python main.py train --model m2_regularised
+```
+
+Run `m2_regularised_1793377157734286200` : arrêt à l'époque 16, checkpoint de l'époque 8. En **validation**
+il paraît meilleur (macro F1 0,461 contre 0,379 pour v2 à son époque retenue), mais en **test** il obtient
+36,44 % (macro F1 0,3579) contre 41,78 % pour v2. McNemar : 37 contre 25 images, **p = 0,16 : aucune
+différence démontrée**. Conclusion : la régularisation ne fournit pas de preuve d'amélioration ; v2_relu reste
+la référence de M2. Ce résultat montre aussi qu'un écart de quelques points en validation (225 images) peut
+être du bruit. Le test n'a servi à aucun choix.
