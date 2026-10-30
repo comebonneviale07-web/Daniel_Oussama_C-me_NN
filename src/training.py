@@ -14,11 +14,14 @@ import torch
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 from threadpoolctl import threadpool_limits
 from torch import nn
 from torch.utils.data import DataLoader, Subset
 from torchvision import datasets
 
+from src.features import logistic_inputs
 from src.versions import MODEL_VERSIONS, get_version, write_run_readme
 from src.models import build_model, preprocessing
 
@@ -67,6 +70,29 @@ def training_normalization(dataset, train_indices, batch_size=32):
     mean = total / pixels
     std = (squared / pixels - mean.square()).clamp_min(1e-12).sqrt()
     return {"mean": mean.tolist(), "std": std.tolist(), "source": "training split only"}
+
+
+class CheckpointSelector:
+    """Keeps the best epoch on a validation metric and says when to stop early.
+
+    metric "val_loss" (lower is better, the historical default) or "val_macro_f1" (higher is better);
+    patience None trains every epoch, otherwise training stops after that many epochs without improvement.
+    """
+
+    def __init__(self, metric="val_loss", patience=None):
+        if metric not in ("val_loss", "val_macro_f1"):
+            raise ValueError(f"Unknown selection metric {metric!r}")
+        self.metric, self.patience = metric, patience
+        self.best, self.best_epoch = None, None
+
+    def update(self, row):
+        """(improved, stop) after the validation row of one epoch."""
+        value = row[self.metric]
+        improved = self.best is None or (value < self.best if self.metric == "val_loss" else value > self.best)
+        if improved:
+            self.best, self.best_epoch = value, row["epoch"]
+        stop = self.patience is not None and row["epoch"] - self.best_epoch >= self.patience
+        return improved, stop
 
 
 def evaluate(model, loader, device):
@@ -132,27 +158,39 @@ def main(default_model=None):
     write_json(out / "config.json", run_config)
     write_run_readme(out, run_config)
     write_json(out / "split.json", split)
-    loaders = {key: DataLoader(Subset(dataset, indices), batch_size=args.batch_size,
-                               shuffle=key == "train", num_workers=0) for key, indices in ids.items()}
+    # Augmentation applies to the training images only: validation and test keep the deterministic transform.
+    train_dataset = dataset
+    if version.get("augmentation"):
+        train_dataset = datasets.ImageFolder(args.data, transform=preprocessing(args.model, normalization, train=True))
+    loaders = {key: DataLoader(Subset(train_dataset if key == "train" else dataset, indices),
+                               batch_size=args.batch_size, shuffle=key == "train", num_workers=0)
+               for key, indices in ids.items()}
     started = time.perf_counter()
     selected_epoch = None
-    if args.model == "m0":
+    if version["kind"] == "logistic":
         import joblib
         arrays = {}
         for key, indices in ids.items():
             samples = [dataset[i] for i in indices]
-            arrays[key] = (np.stack([x.numpy().ravel() for x, _ in samples]), np.array([y for _, y in samples]))
+            arrays[key] = (logistic_inputs(version, torch.stack([x for x, _ in samples])),
+                           np.array([y for _, y in samples]))
         # C is selected on validation only; test remains untouched until selection ends.
+        selection_metric = version.get("selection_metric", "val_accuracy")
         best_score, model = -1, None
         candidates = []
         for c in version["c_candidates"]:
             candidate = LogisticRegression(C=c, max_iter=version["max_iter"], random_state=args.seed)
+            if version.get("standardize"):
+                candidate = make_pipeline(StandardScaler(), candidate)
             with threadpool_limits(limits=args.threads):
                 candidate.fit(*arrays["train"])
-            score = candidate.score(*arrays["val"])
-            candidates.append({"C": c, "val_accuracy": score, "iterations": candidate.n_iter_.tolist()})
-            if score > best_score:
-                best_score, model = score, candidate
+            val_predicted = candidate.predict(arrays["val"][0])
+            scores = {"val_accuracy": accuracy_score(arrays["val"][1], val_predicted),
+                      "val_macro_f1": f1_score(arrays["val"][1], val_predicted, average="macro", zero_division=0)}
+            iterations = (candidate[-1] if version.get("standardize") else candidate).n_iter_.tolist()
+            candidates.append({"C": c, **scores, "iterations": iterations})
+            if scores[selection_metric] > best_score:
+                best_score, model = scores[selection_metric], candidate
         write_json(out / "selection.json", candidates)
         joblib.dump(model, out / "best.joblib")
         truth = arrays["test"][1].tolist()
@@ -161,11 +199,19 @@ def main(default_model=None):
         device = torch.device(args.device)
         model = build_model(args.model, len(dataset.classes)).to(device)
         model.input_normalization = normalization
-        optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr)
-        history, gradients, best_loss = [], [], float("inf")
+        trainable = [p for p in model.parameters() if p.requires_grad]
+        if version.get("optimizer", "adam") == "adamw":
+            optimizer = torch.optim.AdamW(trainable, lr=args.lr, weight_decay=version.get("weight_decay", 0.))
+        else:
+            optimizer = torch.optim.Adam(trainable, lr=args.lr, weight_decay=version.get("weight_decay", 0.))
+        scheduler = (torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.epochs)
+                     if version.get("scheduler") == "cosine" else None)
+        selector = CheckpointSelector(version.get("selection_metric", "val_loss"), version.get("patience"))
+        log_gradients = version["version"].startswith("m2/")
+        history, gradients = [], []
         for epoch in range(1, args.epochs + 1):
             model.train()
-            if args.model == "m3_frozen":
+            if version.get("frozen"):
                 model.eval()  # Freeze batch-normalization statistics as well as weights.
                 model.fc.train()
             loss_sum, correct, count = 0., 0, 0
@@ -174,11 +220,11 @@ def main(default_model=None):
                 x, y = x.to(device), y.to(device)
                 optimizer.zero_grad()
                 output = model(x)
-                loss = nn.functional.cross_entropy(output, y)
+                loss = nn.functional.cross_entropy(output, y, label_smoothing=version.get("label_smoothing", 0.))
                 loss.backward()
-                if args.model in ("m2", "m2_fixed"):
+                if log_gradients:
                     for name, param in model.named_parameters():
-                        if name.endswith("weight") and param.grad is not None:
+                        if name.endswith("weight") and param.ndim >= 2 and param.grad is not None:
                             grad_sum[name] = grad_sum.get(name, 0.) + param.grad.norm().item()
                 optimizer.step()
                 batches += 1
@@ -191,17 +237,24 @@ def main(default_model=None):
                        val_macro_f1=f1_score(val_truth, val_predicted, labels=list(range(len(dataset.classes))),
                                              average="macro", zero_division=0),
                        val_predicted_classes=len(set(val_predicted)))
+            if scheduler is not None:
+                row["lr"] = scheduler.get_last_lr()[0]
+                scheduler.step()
             history.append(row)
             gradients.append({"epoch": epoch, **{key: value/batches for key, value in grad_sum.items()}})
             write_json(out / "history.json", history)
-            if args.model in ("m2", "m2_fixed"):
+            if log_gradients:
                 write_json(out / "gradients.json", gradients)
             print(row, flush=True)
-            if val_loss < best_loss:
-                best_loss = val_loss
+            improved, stop = selector.update(row)
+            if improved:
                 torch.save({"state_dict": model.state_dict(), "model": args.model,
                             "classes": dataset.classes, "epoch": epoch,
-                            "input_normalization": normalization}, out / "best.pt")
+                            "input_normalization": normalization,
+                            "selection_metric": selector.metric}, out / "best.pt")
+            if stop:
+                print(f"Early stopping: no {selector.metric} improvement for {selector.patience} epochs", flush=True)
+                break
         checkpoint = torch.load(out / "best.pt", map_location=device, weights_only=True)
         selected_epoch = checkpoint["epoch"]
         model.load_state_dict(checkpoint["state_dict"])
@@ -218,7 +271,7 @@ def main(default_model=None):
         fig.tight_layout()
         fig.savefig(out / "curves.png")
         plt.close(fig)
-        if args.model in ("m2", "m2_fixed"):
+        if log_gradients:
             fig, axis = plt.subplots(figsize=(8, 4))
             for layer in grad_sum:
                 axis.plot([r["epoch"] for r in gradients], [r[layer] for r in gradients], label=layer)
