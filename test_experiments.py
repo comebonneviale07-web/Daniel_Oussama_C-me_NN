@@ -23,7 +23,7 @@ class ExperimentTests(unittest.TestCase):
                 folder.mkdir(parents=True)
                 for index in range(20):
                     Image.new("RGB", (16, 16), (label * 40, index * 10, 0)).save(folder / f"{index}.png")
-            for name in ("m0", "m1", "m2"):
+            for name in ("m0", "m1", "m2", "m2_fixed"):
                 result = subprocess.run([sys.executable, str(Path(__file__).with_name("experiments.py")),
                                 "--model", name, "--data", str(root / "images"),
                                 "--split", str(root / "split.json"), "--output", str(root / "runs"),
@@ -40,7 +40,7 @@ class ExperimentTests(unittest.TestCase):
                 self.assertTrue((run / "confusion_matrix.png").exists())
                 checkpoint = "best.joblib" if name == "m0" else "best.pt"
                 self.assertTrue((run / checkpoint).exists())
-                if name == "m2":
+                if name.startswith("m2"):
                     gradients = json.loads((run / "gradients.json").read_text())
                     self.assertEqual(len(gradients[0]), 7)  # epoch and six linear weight matrices
 
@@ -66,7 +66,7 @@ class ExperimentTests(unittest.TestCase):
 
     def test_mlps_backpropagate_and_checkpoint_round_trip(self):
         torch.set_num_threads(2)
-        for name in ("m1", "m2"):
+        for name in ("m1", "m2", "m2_fixed"):
             torch.manual_seed(42)
             model = build_model(name, 5)
             inputs = torch.rand(2, 3, 64, 64)
@@ -85,6 +85,15 @@ class ExperimentTests(unittest.TestCase):
                 restored.load_state_dict(torch.load(path, weights_only=True))
                 with torch.no_grad():
                     torch.testing.assert_close(model(inputs), restored(inputs))
+
+    def test_m2_fixed_keeps_m2_widths_with_relu_no_dropout_and_standardised_inputs(self):
+        fixed, original = build_model("m2_fixed", 5), build_model("m2", 5)
+        self.assertEqual([p.shape for p in fixed.parameters()], [p.shape for p in original.parameters()])
+        self.assertFalse(any(isinstance(m, (torch.nn.Sigmoid, torch.nn.Dropout)) for m in fixed))
+        self.assertEqual(sum(isinstance(m, torch.nn.ReLU) for m in fixed), 5)
+        image = Image.new("RGB", (128, 128), (255, 255, 255))
+        self.assertTrue(torch.all(preprocessing("m2")(image) == 1))
+        self.assertTrue(torch.all(preprocessing("m2_fixed")(image) > 1))  # standardised: white is above the mean
 
     def test_resnet_freezes_only_backbone_and_preprocessing_shape(self):
         model = build_model("m3_frozen", 5, pretrained=False)

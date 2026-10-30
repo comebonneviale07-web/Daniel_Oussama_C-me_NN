@@ -20,6 +20,10 @@ from torch.utils.data import DataLoader, Subset
 from torchvision import datasets, models, transforms
 
 ROOT = Path(__file__).resolve().parent
+# Per-channel mean and standard deviation of the 1,050 training paintings of splits/style5.json at 64 px
+# (training images only, so no information from validation or test), used to standardise m2_fixed's inputs.
+TRAIN_MEAN = (0.5471, 0.4992, 0.4375)
+TRAIN_STD = (0.2633, 0.2545, 0.2513)
 
 
 def write_json(path, value):
@@ -59,10 +63,11 @@ def build_model(name, classes, pretrained=True):
                 param.requires_grad = False
         model.fc = nn.Linear(model.fc.in_features, classes)
         return model
+    # m2_fixed: M2's widths with the repairs measured in DIAGNOSIS.md (ReLU, no dropout; lr and inputs below).
     widths = [3 * 64 * 64, 256] if name == "m1" else [3 * 64 * 64, 512, 256, 128, 64, 32]
     layers = [nn.Flatten()]
     for incoming, outgoing in zip(widths, widths[1:]):
-        layers.extend([nn.Linear(incoming, outgoing), nn.ReLU() if name == "m1" else nn.Sigmoid()])
+        layers.extend([nn.Linear(incoming, outgoing), nn.Sigmoid() if name == "m2" else nn.ReLU()])
         if name == "m2":
             layers.append(nn.Dropout(.3))
     layers.append(nn.Linear(widths[-1], classes))
@@ -72,7 +77,10 @@ def build_model(name, classes, pretrained=True):
 def preprocessing(name):
     if name.startswith("m3"):
         return models.ResNet18_Weights.DEFAULT.transforms()
-    return transforms.Compose([transforms.Resize((64, 64)), transforms.ToTensor()])
+    steps = [transforms.Resize((64, 64)), transforms.ToTensor()]
+    if name == "m2_fixed":
+        steps.append(transforms.Normalize(TRAIN_MEAN, TRAIN_STD))
+    return transforms.Compose(steps)
 
 
 def evaluate(model, loader, device):
@@ -89,7 +97,7 @@ def evaluate(model, loader, device):
 
 def main(default_model=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", choices=["m0", "m1", "m2", "m3", "m3_frozen"], default=default_model or "m1")
+    parser.add_argument("--model", choices=["m0", "m1", "m2", "m2_fixed", "m3", "m3_frozen"], default=default_model or "m1")
     parser.add_argument("--data", type=Path, default=ROOT / "data/wikiart_style5")
     parser.add_argument("--split", type=Path, default=ROOT / "splits/style5.json")
     parser.add_argument("--output", type=Path, default=ROOT / "runs")
@@ -101,8 +109,8 @@ def main(default_model=None):
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cpu")
     parser.add_argument("--split-only", action="store_true")
     args = parser.parse_args()
-    args.epochs = args.epochs if args.epochs is not None else {"m1": 3, "m2": 15, "m3": 10, "m3_frozen": 10, "m0": 1}[args.model]
-    args.lr = args.lr if args.lr is not None else {"m1": .001, "m2": .01, "m3": .0001, "m3_frozen": .001, "m0": .001}[args.model]
+    args.epochs = args.epochs if args.epochs is not None else {"m1": 3, "m2": 15, "m2_fixed": 20, "m3": 10, "m3_frozen": 10, "m0": 1}[args.model]
+    args.lr = args.lr if args.lr is not None else {"m1": .001, "m2": .01, "m2_fixed": .0001, "m3": .0001, "m3_frozen": .001, "m0": .001}[args.model]
     if args.epochs < 1 or args.batch_size < 1 or args.lr <= 0 or args.threads < 1:
         parser.error("epochs, batch size, threads, and learning rate must be positive")
     torch.set_num_threads(args.threads)
@@ -167,7 +175,7 @@ def main(default_model=None):
                 output = model(x)
                 loss = nn.functional.cross_entropy(output, y)
                 loss.backward()
-                if args.model == "m2":
+                if args.model.startswith("m2"):
                     for name, param in model.named_parameters():
                         if name.endswith("weight") and param.grad is not None:
                             grad_sum[name] = grad_sum.get(name, 0.) + param.grad.norm().item()
@@ -182,7 +190,7 @@ def main(default_model=None):
             history.append(row)
             gradients.append({"epoch": epoch, **{key: value/batches for key, value in grad_sum.items()}})
             write_json(out / "history.json", history)
-            if args.model == "m2":
+            if args.model.startswith("m2"):
                 write_json(out / "gradients.json", gradients)
             print(row, flush=True)
             if val_loss < best_loss:
@@ -204,7 +212,7 @@ def main(default_model=None):
         fig.tight_layout()
         fig.savefig(out / "curves.png")
         plt.close(fig)
-        if args.model == "m2":
+        if args.model.startswith("m2"):
             fig, axis = plt.subplots(figsize=(8, 4))
             for layer in grad_sum:
                 axis.plot([r["epoch"] for r in gradients], [r[layer] for r in gradients], label=layer)
