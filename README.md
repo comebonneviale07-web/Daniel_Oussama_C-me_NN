@@ -44,6 +44,7 @@ in multiple partitions, so it does not measure generalization to unseen artists.
 | M0 | scikit-learn logistic regression; C selected using validation accuracy | 64 x 64 RGB, flattened, values in [0,1] |
 | M1 | 256-unit ReLU MLP | 64 x 64 RGB, values in [0,1] |
 | M2 | Five sigmoid layers, dropout 0.3; original learning rate retained for diagnosis | 64 x 64 RGB, values in [0,1] |
+| M2 fixed | M2's widths repaired as measured in DIAGNOSIS.md: ReLU, no dropout, lr 1e-4, 20 epochs | 64 x 64 RGB, standardised per channel (training statistics) |
 | M3 | ImageNet ResNet-18; all layers fine-tuned | pretrained weights' resize/crop/normalization |
 | M3 frozen | ResNet backbone and batch-normalization statistics frozen; classifier trained | same as M3 |
 
@@ -77,6 +78,7 @@ serialised size, and computes 95 % bootstrap intervals from `test_predictions.cs
 | Model | Test accuracy [95 % CI] | Macro F1 | CPU time / painting (p90) | Size | Run |
 | --- | --- | ---: | ---: | ---: | --- |
 | M2 MLP, 5 sigmoid layers | 0.200 [0.151, 0.253] | 0.067 | 3.3 ms (4.5) | 25.9 MB | `m2_1793300452973140000` |
+| M2 fixed, 5 ReLU layers | 0.404 [0.342, 0.471] | 0.390 | same as M2 * | 25.9 MB | `m2_fixed_1793368618444914200` |
 | M1 MLP, 1 ReLU layer | 0.302 [0.244, 0.364] | 0.257 | 1.7 ms (1.8) | 12.6 MB | `m1_1793299518786019100` |
 | M0 logistic regression (pixels) | 0.378 [0.320, 0.444] | 0.372 | 0.6 ms (0.8) | 0.5 MB | `m0_1793355775110682900` |
 | M3 ResNet-18, frozen backbone | 0.751 [0.698, 0.809] | 0.749 | 158 ms (185) | 44.8 MB | `m3_frozen_1793300573210941500` |
@@ -84,14 +86,19 @@ serialised size, and computes 95 % bootstrap intervals from `test_predictions.cs
 
 ![Accuracy vs CPU cost](runs/benchmark_1793358411979475300/accuracy_vs_latency.png)
 
+\* M2 fixed has M2's architecture; timed in a separate run on battery power (CPU throttled to 1.4 GHz), it took
+7.6 ms against 8.1 ms for M2 in that same run, so its latency is M2's. Those throttled timings are not mixed into
+the table.
+
 Both M3 variants have the same architecture, so the same inference cost (the 7 ms gap is timing noise); M1, M2 and
 M3 frozen were timed with their exact architecture because their weights are not on the benchmarking computer.
 
 **Recommendation: a neural network is worth it, but a pretrained one.**
 
 1. **Do not deploy an MLP trained on pixels.** M1 (0.30) does not beat a plain logistic regression on the same
-   pixels (0.38), and M2 predicts a single style (see [DIAGNOSIS.md](DIAGNOSIS.md) on the diagnosis branch). Both
-   are wrong on most paintings.
+   pixels (0.38), and M2 predicts a single style (see [DIAGNOSIS.md](DIAGNOSIS.md)). Repaired, M2 reaches 0.40, the
+   level of the logistic regression (overlapping intervals): fixing the training removes the bug, not the limit of
+   an MLP on flattened pixels. All of them are wrong on most paintings.
 2. **Deploy the fine-tuned ResNet-18 (M3):** 0.83 test accuracy, more than twice the classical model, with
    non-overlapping confidence intervals. It answers in about 0.15 s per painting on a single CPU thread and takes
    45 MB: no GPU and no cloud service, so no recurring cost on a modest kiosk.
@@ -123,7 +130,7 @@ python predict.py a.jpg b.png --run runs/<run folder> --top 3 --min-confidence .
 ```
 
 Without `--run` it picks the latest run whose weights (`best.pt` / `best.joblib`, not in Git) and `config.json`
-are present, preferring M3, then M3 frozen, M1, M0 and M2. With `--min-confidence`, a top probability below the
+are present, preferring M3, then M3 frozen, M2 fixed, M1, M0 and M2. With `--min-confidence`, a top probability below the
 threshold is answered `uncertain`, so a kiosk can say "I am not sure" rather than give a wrong style. Example with
 the fine-tuned M3 on one test painting per style: Ukiyo_e 99 %, Impressionism 97 %, Pop_Art 88 %, Cubism 65 %,
 Baroque 54 %, all correct. Only load run files you produced: `best.joblib` is a pickle and can execute code.

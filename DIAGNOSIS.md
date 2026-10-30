@@ -123,6 +123,26 @@ scale have to be tuned together.
   F1. Its limit is the representation (flattened pixels carry no notion of shape), which is why the pretrained
   ResNet (75 % test accuracy, `m3_frozen_1793300573210941500`) is far ahead.
 
+## Test score of the repaired M2 (`m2_fixed`)
+
+The four fixes are now a model of `experiments.py` (`python train_m2_fixed.py`): M2's widths with ReLU, no dropout,
+inputs standardised with the training-set channel statistics, Adam lr 1e-4, 20 epochs, checkpoint chosen on
+validation loss (epoch 6). M2 itself is kept unchanged as the failure case. Run `m2_fixed_1793368618444914200`:
+
+| | M2 | M2 fixed |
+| --- | ---: | ---: |
+| Test accuracy [95 % CI] | 0.200 [0.151, 0.253] | **0.404 [0.342, 0.471]** |
+| Test macro F1 | 0.067 | **0.390** |
+| Styles predicted on the test set | 1 (Cubism) | **5** |
+| First / last layer gradient, epoch 1 | 5.4e-05 / 0.39 | 0.19 / 0.20 |
+
+Test confusion matrix of M2 fixed (rows = true style, columns = predicted; Baroque, Cubism, Impressionism, Pop_Art,
+Ukiyo_e): `[30, 0, 10, 3, 2]`, `[10, 8, 5, 15, 7]`, `[14, 5, 11, 10, 5]`, `[6, 7, 6, 22, 4]`, `[4, 5, 11, 5, 20]`.
+The gradient now reaches the first layer as strongly as the last, and every style is predicted. Baroque (30 / 45)
+and Pop_Art (22 / 45) are recognised best; Cubism is the weakest (8 / 45, often taken for Pop_Art). The repaired
+network is at the level of the logistic regression M0 (0.378, overlapping intervals) and still far below the
+pretrained ResNet (0.75-0.83): the repair removes the bug, not the limit of an MLP on flattened pixels.
+
 ## Recommended settings for the final MLP (M1)
 
 Standardised inputs, one ReLU layer, Adam lr 1e-4, mirror augmentation, model selected on validation.

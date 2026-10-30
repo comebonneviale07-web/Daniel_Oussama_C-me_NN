@@ -9,6 +9,7 @@ using validation loss; these are test results, not validation results.
 | M0 | `m0_1793355775110682900` | 37.78% | 0.3722 | 140 seconds (C = 0.01 chosen on validation) |
 | M1 | `m1_1793299518786019100` | 30.22% | 0.2565 | 35.3 seconds |
 | M2 | `m2_1793300452973140000` | 20.00% | 0.0667 | 92.6 seconds |
+| M2 fixed | `m2_fixed_1793368618444914200` | 40.44% | 0.3900 | 168 seconds (8 threads) |
 | Frozen ResNet | `m3_frozen_1793300573210941500` | 75.11% | 0.7485 | 961.8 seconds |
 | Fine-tuned ResNet (M3) | `m3_1793355952561843000` | 83.11% | 0.8304 | 2,375 seconds (8 threads) |
 
