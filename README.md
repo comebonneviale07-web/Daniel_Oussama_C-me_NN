@@ -112,6 +112,22 @@ M1 originally trained on every image, so those weights must not be evaluated as 
 independent held-out baseline. Original M2/M3 splits were not saved. Retrain before
 reporting a fair comparison. No new performance claims are made by these code changes.
 
+## Predicting new paintings
+
+`predict.py` is the guide's recognition step: it loads a trained run, applies that model's own preprocessing to
+any image (a photo of any size works) and returns the most likely styles with their probability.
+
+```powershell
+python predict.py photo.jpg                                    # best run whose weights are on this computer
+python predict.py a.jpg b.png --run runs/<run folder> --top 3 --min-confidence .5 --json
+```
+
+Without `--run` it picks the latest run whose weights (`best.pt` / `best.joblib`, not in Git) and `config.json`
+are present, preferring M3, then M3 frozen, M1, M0 and M2. With `--min-confidence`, a top probability below the
+threshold is answered `uncertain`, so a kiosk can say "I am not sure" rather than give a wrong style. Example with
+the fine-tuned M3 on one test painting per style: Ukiyo_e 99 %, Impressionism 97 %, Pop_Art 88 %, Cubism 65 %,
+Baroque 54 %, all correct. Only load run files you produced: `best.joblib` is a pickle and can execute code.
+
 ## Dataset reproduction
 
 ```powershell
