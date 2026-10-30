@@ -1,0 +1,328 @@
+{
+  "experiment": "prototype",
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "elapsed_seconds": 469.27367880009115,
+  "runs": [
+    {
+      "run": "M2 as trained (sigmoid, dropout .3, lr 1e-2, inputs 0-1)",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6417415807360694,
+      "final_train_loss": 1.6100948404130482,
+      "final_train_accuracy": 0.1961904761904762,
+      "best_val_macro_f1": 0.06666666666666667,
+      "best_val_accuracy": 0.20000000298023224,
+      "best_epoch": 1,
+      "final_val_predicted_classes": 1,
+      "first_to_last_layer_gradient_ratio": 3.0853639353903237e-08,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9992014169692993,
+          "zero": 0.45330730080604553,
+          "constant_units": 0.96875
+        },
+        {
+          "layer": 2,
+          "saturated": 0.98046875,
+          "zero": 0.0,
+          "constant_units": 0.98828125
+        },
+        {
+          "layer": 3,
+          "saturated": 0.96875,
+          "zero": 0.0,
+          "constant_units": 1.0
+        },
+        {
+          "layer": 4,
+          "saturated": 0.546875,
+          "zero": 0.0,
+          "constant_units": 1.0
+        },
+        {
+          "layer": 5,
+          "saturated": 0.90625,
+          "zero": 0.0,
+          "constant_units": 1.0
+        }
+      ]
+    },
+    {
+      "run": "lr 1e-4",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.655481112798055,
+      "final_train_loss": 1.6014603305998303,
+      "final_train_accuracy": 0.23904761904761904,
+      "best_val_macro_f1": 0.18638034759358288,
+      "best_val_accuracy": 0.31555554270744324,
+      "best_epoch": 4,
+      "final_val_predicted_classes": 2,
+      "first_to_last_layer_gradient_ratio": 0.02783920106656443,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.4085763990879059,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 2,
+          "saturated": 0.024635417386889458,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 3,
+          "saturated": 0.0,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 4,
+          "saturated": 0.0,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 5,
+          "saturated": 0.0,
+          "zero": 0.0,
+          "constant_units": 0.03125
+        }
+      ]
+    },
+    {
+      "run": "lr 1e-4, no dropout",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.634228471347264,
+      "final_train_loss": 1.5249861667269753,
+      "final_train_accuracy": 0.34,
+      "best_val_macro_f1": 0.1997905002290196,
+      "best_val_accuracy": 0.3199999928474426,
+      "best_epoch": 17,
+      "final_val_predicted_classes": 4,
+      "first_to_last_layer_gradient_ratio": 0.1291549214266973,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.40767359733581543,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 2,
+          "saturated": 0.04954861104488373,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 3,
+          "saturated": 0.0,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 4,
+          "saturated": 0.0,
+          "zero": 0.0,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 5,
+          "saturated": 0.0,
+          "zero": 0.0,
+          "constant_units": 0.0
+        }
+      ]
+    },
+    {
+      "run": "ReLU (lr 1e-2)",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 2.021840801239014,
+      "final_train_loss": 1.6100386188143776,
+      "final_train_accuracy": 0.18761904761904763,
+      "best_val_macro_f1": 0.1892618120067925,
+      "best_val_accuracy": 0.30666667222976685,
+      "best_epoch": 1,
+      "final_val_predicted_classes": 1,
+      "first_to_last_layer_gradient_ratio": 0.0,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9999826550483704,
+          "zero": 0.9999739527702332,
+          "constant_units": 0.994140625
+        },
+        {
+          "layer": 2,
+          "saturated": 0.921753466129303,
+          "zero": 0.91776043176651,
+          "constant_units": 0.87109375
+        },
+        {
+          "layer": 3,
+          "saturated": 0.8828819394111633,
+          "zero": 0.875034749507904,
+          "constant_units": 0.8984375
+        },
+        {
+          "layer": 4,
+          "saturated": 0.90625,
+          "zero": 0.90625,
+          "constant_units": 0.953125
+        },
+        {
+          "layer": 5,
+          "saturated": 1.0,
+          "zero": 1.0,
+          "constant_units": 1.0
+        }
+      ]
+    },
+    {
+      "run": "lr 1e-4, ReLU",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6114041669028145,
+      "final_train_loss": 1.5609268996829078,
+      "final_train_accuracy": 0.2914285714285714,
+      "best_val_macro_f1": 0.2378403047332831,
+      "best_val_accuracy": 0.30666667222976685,
+      "best_epoch": 13,
+      "final_val_predicted_classes": 4,
+      "first_to_last_layer_gradient_ratio": 0.5555755277046689,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9919704794883728,
+          "zero": 0.9207899570465088,
+          "constant_units": 0.890625
+        },
+        {
+          "layer": 2,
+          "saturated": 0.7276215553283691,
+          "zero": 0.5333159565925598,
+          "constant_units": 0.296875
+        },
+        {
+          "layer": 3,
+          "saturated": 0.6333680748939514,
+          "zero": 0.527916669845581,
+          "constant_units": 0.28125
+        },
+        {
+          "layer": 4,
+          "saturated": 0.6164583563804626,
+          "zero": 0.551111102104187,
+          "constant_units": 0.234375
+        },
+        {
+          "layer": 5,
+          "saturated": 0.6056944727897644,
+          "zero": 0.5570833086967468,
+          "constant_units": 0.21875
+        }
+      ]
+    },
+    {
+      "run": "lr 1e-4, ReLU, no dropout",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.6053879290535336,
+      "final_train_loss": 1.370110247248695,
+      "final_train_accuracy": 0.4123809523809524,
+      "best_val_macro_f1": 0.3261269654473538,
+      "best_val_accuracy": 0.36000001430511475,
+      "best_epoch": 18,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.5458250235855245,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.9810503721237183,
+          "zero": 0.6774652600288391,
+          "constant_units": 0.65625
+        },
+        {
+          "layer": 2,
+          "saturated": 0.918055534362793,
+          "zero": 0.4428819417953491,
+          "constant_units": 0.33984375
+        },
+        {
+          "layer": 3,
+          "saturated": 0.9154860973358154,
+          "zero": 0.5424652695655823,
+          "constant_units": 0.359375
+        },
+        {
+          "layer": 4,
+          "saturated": 0.835694432258606,
+          "zero": 0.4272916615009308,
+          "constant_units": 0.28125
+        },
+        {
+          "layer": 5,
+          "saturated": 0.7144444584846497,
+          "zero": 0.4870833456516266,
+          "constant_units": 0.15625
+        }
+      ]
+    },
+    {
+      "run": "lr 1e-4, ReLU, no dropout, standardised inputs",
+      "epochs": 20,
+      "diverged": false,
+      "first_epoch_loss": 1.5739021383013043,
+      "final_train_loss": 0.16229894598325093,
+      "final_train_accuracy": 0.9542857142857143,
+      "best_val_macro_f1": 0.40865653099227267,
+      "best_val_accuracy": 0.40444445610046387,
+      "best_epoch": 10,
+      "final_val_predicted_classes": 5,
+      "first_to_last_layer_gradient_ratio": 0.8584518912186021,
+      "activations": [
+        {
+          "layer": 1,
+          "saturated": 0.937829852104187,
+          "zero": 0.4841145873069763,
+          "constant_units": 0.0
+        },
+        {
+          "layer": 2,
+          "saturated": 0.930138885974884,
+          "zero": 0.22468750178813934,
+          "constant_units": 0.00390625
+        },
+        {
+          "layer": 3,
+          "saturated": 0.9329861402511597,
+          "zero": 0.19631944596767426,
+          "constant_units": 0.046875
+        },
+        {
+          "layer": 4,
+          "saturated": 0.9340972304344177,
+          "zero": 0.27118057012557983,
+          "constant_units": 0.140625
+        },
+        {
+          "layer": 5,
+          "saturated": 0.8963888883590698,
+          "zero": 0.18291667103767395,
+          "constant_units": 0.03125
+        }
+      ]
+    }
+  ]
+}
