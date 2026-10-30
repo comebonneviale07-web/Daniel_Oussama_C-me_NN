@@ -11,7 +11,7 @@ configs/     mod?les M0, M1, M2, M3 ; versions JSON et un README par mod?le
 tests/       tests : training / evaluation / prediction
 results/     entra?nements class?s par mod?le puis version
 docs/        r?sultats, diagnostic et historique
-data/        images, m?tadonn?es et splits partag?s
+data/        métadonnées et splits partagés (images hors Git : voir data/README.md)
 archives/    anciens poids et sauvegardes ZIP
 ```
 
@@ -32,6 +32,9 @@ python main.py diagnose --experiment prototype
 python main.py backup
 python -m unittest discover -s tests -v
 ```
+
+Les images ne sont pas dans Git : les reconstruire une fois avec la commande de
+[data/README.md](data/README.md) (mêmes 1 500 images pour tout le monde).
 
 Pour installer : `py -3.13 -m venv .venv`, activer l'environnement, puis
 `python -m pip install -r requirements-lock.txt`. Les options de chaque commande

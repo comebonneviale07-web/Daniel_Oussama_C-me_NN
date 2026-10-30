@@ -10,6 +10,14 @@ ci-dessous d?crivent les ?tapes pr?c?dentes ; le README racine est la r?f?rence 
 
 # Historique des modèles et de l'organisation
 
+## 31 octobre 2026 — images et anciens poids retirés du suivi Git
+
+Les 1 500 images WikiArt (licence inconnue, publication interdite par le script du cours) et les trois
+anciens poids `archives/legacy_models/*.pth` (196 Mo) ne sont plus suivis ; `.gitignore` les exclut.
+Les fichiers restent sur les disques. Les images se reconstruisent à l'identique avec la commande de
+`data/README.md` (plan vérifié identique à `metadata.csv`). Les anciens commits contiennent encore ces
+fichiers : les effacer de l'historique demande une réécriture et l'accord de tout le groupe.
+
 ## 30 octobre 2026 — versions améliorées et comparaison statistique
 
 Nouvelles options de configuration (valeurs par défaut identiques aux anciennes versions, qui ne changent
