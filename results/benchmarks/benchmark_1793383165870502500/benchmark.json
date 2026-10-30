@@ -1,0 +1,240 @@
+{
+  "cpu": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+  "logical_cpus": 8,
+  "threads": 1,
+  "timed_images": 60,
+  "torch_version": "2.7.0+cpu",
+  "models": [
+    {
+      "model": "m2",
+      "label": "M2 MLP, 5 sigmoid layers",
+      "family": "MLP on pixels",
+      "run": "m2_1793300452973140000",
+      "test_paintings": 225,
+      "test_accuracy": 0.2,
+      "accuracy_ci95": [
+        0.1511111111111111,
+        0.25333333333333335
+      ],
+      "test_macro_f1": 0.06666666666666667,
+      "macro_f1_ci95": [
+        0.052509652509652505,
+        0.08085106382978723
+      ],
+      "latency_median_ms": 8.95575003232807,
+      "latency_p90_ms": 16.254100017249584,
+      "size_mb": 25.870911,
+      "timed_with_trained_weights": false
+    },
+    {
+      "model": "m1",
+      "label": "M1 MLP, 1 ReLU layer",
+      "family": "MLP on pixels",
+      "run": "m1_1793299518786019100",
+      "test_paintings": 225,
+      "test_accuracy": 0.3022222222222222,
+      "accuracy_ci95": [
+        0.24444444444444444,
+        0.36444444444444446
+      ],
+      "test_macro_f1": 0.25651072321438584,
+      "macro_f1_ci95": [
+        0.20382582934083152,
+        0.3064192127921408
+      ],
+      "latency_median_ms": 4.10720007494092,
+      "latency_p90_ms": 5.821100203320384,
+      "size_mb": 12.591325,
+      "timed_with_trained_weights": false
+    },
+    {
+      "model": "m2_regularised",
+      "label": "M2 regularised (BatchNorm, flip)",
+      "family": "MLP on pixels",
+      "run": "m2_regularised_1793377157734286200",
+      "test_paintings": 225,
+      "test_accuracy": 0.36444444444444446,
+      "accuracy_ci95": [
+        0.3022222222222222,
+        0.4266666666666667
+      ],
+      "test_macro_f1": 0.3578917649855865,
+      "macro_f1_ci95": [
+        0.29804065482422,
+        0.4150703066464806
+      ],
+      "latency_median_ms": 8.153999922797084,
+      "latency_p90_ms": 9.201699867844582,
+      "size_mb": 25.89362,
+      "timed_with_trained_weights": true
+    },
+    {
+      "model": "m1_tuned",
+      "label": "M1 tuned (standardised, flip)",
+      "family": "MLP on pixels",
+      "run": "m1_tuned_1793372169401909300",
+      "test_paintings": 225,
+      "test_accuracy": 0.37333333333333335,
+      "accuracy_ci95": [
+        0.3111111111111111,
+        0.43555555555555553
+      ],
+      "test_macro_f1": 0.3645479908274827,
+      "macro_f1_ci95": [
+        0.30557485280816044,
+        0.4252159576574626
+      ],
+      "latency_median_ms": 7.546449895016849,
+      "latency_p90_ms": 14.598699985072017,
+      "size_mb": 12.591325,
+      "timed_with_trained_weights": true
+    },
+    {
+      "model": "m0",
+      "label": "M0 logistic regression",
+      "family": "Classical",
+      "run": "m0_1793367969029599200",
+      "test_paintings": 225,
+      "test_accuracy": 0.38222222222222224,
+      "accuracy_ci95": [
+        0.3244444444444444,
+        0.4488888888888889
+      ],
+      "test_macro_f1": 0.37578732952792204,
+      "macro_f1_ci95": [
+        0.3167086288279552,
+        0.4369313685678669
+      ],
+      "latency_median_ms": 0.8581000147387385,
+      "latency_p90_ms": 1.4831000007689,
+      "size_mb": 0.492305,
+      "timed_with_trained_weights": false
+    },
+    {
+      "model": "m2_fixed",
+      "label": "M2 corrected, 5 ReLU layers",
+      "family": "MLP on pixels",
+      "run": "m2_fixed_1793368666087080100",
+      "test_paintings": 225,
+      "test_accuracy": 0.4177777777777778,
+      "accuracy_ci95": [
+        0.35544444444444445,
+        0.48
+      ],
+      "test_macro_f1": 0.40601781783715085,
+      "macro_f1_ci95": [
+        0.3424074336952282,
+        0.4626712008325472
+      ],
+      "latency_median_ms": 9.09645005594939,
+      "latency_p90_ms": 11.849199887365103,
+      "size_mb": 25.870847,
+      "timed_with_trained_weights": false
+    },
+    {
+      "model": "m0_features",
+      "label": "M0 hand-crafted features",
+      "family": "Classical",
+      "run": "m0_features_1793372135499282000",
+      "test_paintings": 225,
+      "test_accuracy": 0.5066666666666667,
+      "accuracy_ci95": [
+        0.4444444444444444,
+        0.5733333333333334
+      ],
+      "test_macro_f1": 0.493166813418852,
+      "macro_f1_ci95": [
+        0.42941655615540647,
+        0.5539031393833554
+      ],
+      "latency_median_ms": 6.576300016604364,
+      "latency_p90_ms": 9.89300012588501,
+      "size_mb": 0.013392,
+      "timed_with_trained_weights": true
+    },
+    {
+      "model": "m3_frozen_augmented",
+      "label": "M3 frozen + augmentation",
+      "family": "Pretrained ResNet-18",
+      "run": "m3_frozen_augmented_1793377409306562700",
+      "test_paintings": 225,
+      "test_accuracy": 0.7066666666666667,
+      "accuracy_ci95": [
+        0.6444444444444445,
+        0.7644444444444445
+      ],
+      "test_macro_f1": 0.7024836918096962,
+      "macro_f1_ci95": [
+        0.6387426384025674,
+        0.7608528241468224
+      ],
+      "latency_median_ms": 261.4452999550849,
+      "latency_p90_ms": 374.4377999100834,
+      "size_mb": 44.793291,
+      "timed_with_trained_weights": true
+    },
+    {
+      "model": "m3_frozen",
+      "label": "M3 ResNet-18, frozen",
+      "family": "Pretrained ResNet-18",
+      "run": "m3_frozen_1793300573210941500",
+      "test_paintings": 225,
+      "test_accuracy": 0.7511111111111111,
+      "accuracy_ci95": [
+        0.6977777777777778,
+        0.8088888888888889
+      ],
+      "test_macro_f1": 0.7485437279546502,
+      "macro_f1_ci95": [
+        0.6910464472462184,
+        0.8045777188215909
+      ],
+      "latency_median_ms": 260.3770998539403,
+      "latency_p90_ms": 373.3506998978555,
+      "size_mb": 44.793291,
+      "timed_with_trained_weights": false
+    },
+    {
+      "model": "m3_augmented",
+      "label": "M3 fine-tuned + augmentation",
+      "family": "Pretrained ResNet-18",
+      "run": "m3_augmented_1793378930229182800",
+      "test_paintings": 225,
+      "test_accuracy": 0.7911111111111111,
+      "accuracy_ci95": [
+        0.7376666666666667,
+        0.8444444444444444
+      ],
+      "test_macro_f1": 0.7885243599245548,
+      "macro_f1_ci95": [
+        0.7311731127628687,
+        0.8411821979838762
+      ],
+      "latency_median_ms": 239.94989995844662,
+      "latency_p90_ms": 355.9725000523031,
+      "size_mb": 44.793291,
+      "timed_with_trained_weights": true
+    },
+    {
+      "model": "m3",
+      "label": "M3 ResNet-18, fine-tuned",
+      "family": "Pretrained ResNet-18",
+      "run": "m3_1793355952561843000",
+      "test_paintings": 225,
+      "test_accuracy": 0.8311111111111111,
+      "accuracy_ci95": [
+        0.7777777777777778,
+        0.88
+      ],
+      "test_macro_f1": 0.8296039844447203,
+      "macro_f1_ci95": [
+        0.7762410217104531,
+        0.8761057805797589
+      ],
+      "latency_median_ms": 258.9675501221791,
+      "latency_p90_ms": 364.90199994295835,
+      "size_mb": 44.793291,
+      "timed_with_trained_weights": true
+    }
+  ]
+}
