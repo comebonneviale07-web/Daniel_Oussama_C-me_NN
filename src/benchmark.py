@@ -70,11 +70,33 @@ def size_mb(model):
     return buffer.tell() / 1e6
 
 
+def untrained_logistic(spec, classes):
+    """A logistic regression (with its scaler if the version has one) of the version's exact input and output
+    sizes, for timing a run whose best.joblib is not on this computer: prediction cost depends only on sizes."""
+    import warnings
+
+    from sklearn.exceptions import ConvergenceWarning
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import StandardScaler
+    size = spec["input_size"]
+    features = logistic_inputs(spec, torch.rand(classes, 3, size, size))
+    model = LogisticRegression(max_iter=10)
+    if spec.get("standardize"):
+        model = make_pipeline(StandardScaler(), model)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", ConvergenceWarning)  # weights are irrelevant for timing
+        return model.fit(features, np.arange(classes))
+
+
 def load_model(name, run, classes):
     """The run's trained model if its weights are on this computer, else the same architecture (trained=False)."""
-    if get_version(name)["kind"] == "logistic":
-        import joblib  # our own run output, not an untrusted file
-        return joblib.load(run / "best.joblib"), True
+    spec = get_version(name)
+    if spec["kind"] == "logistic":
+        if (run / "best.joblib").exists():
+            import joblib  # our own run output, not an untrusted file
+            return joblib.load(run / "best.joblib"), True
+        return untrained_logistic(spec, len(classes)), False
     model = build_model(name, len(classes), pretrained=False)
     checkpoint = run / "best.pt"
     if checkpoint.exists():
