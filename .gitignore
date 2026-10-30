@@ -10,3 +10,7 @@ results/**
 !results/**/*.md
 archives/backups/
 archives/previous_layout/
+# WikiArt images: licence unknown, never in Git. Rebuild them with the command in data/README.md.
+data/wikiart_style5/*/
+# Historical weights: too large for Git, kept locally and in python main.py backup archives.
+archives/legacy_models/*.pth
