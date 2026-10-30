@@ -16,7 +16,7 @@ from PIL import Image
 
 from experiments import ROOT, build_model, preprocessing
 
-PREFERENCE = ("m3", "m3_frozen", "m1", "m0", "m2")  # best test accuracy first, see RESULTS.md
+PREFERENCE = ("m3", "m3_frozen", "m2_fixed", "m1", "m0", "m2")  # best test accuracy first, see RESULTS.md
 
 
 def default_run(runs_dir):

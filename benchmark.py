@@ -24,9 +24,9 @@ from threadpoolctl import threadpool_limits
 
 from experiments import ROOT, build_model, preprocessing, write_json
 
-FAMILIES = {"m0": "Classical", "m1": "MLP on pixels", "m2": "MLP on pixels",
+FAMILIES = {"m0": "Classical", "m1": "MLP on pixels", "m2": "MLP on pixels", "m2_fixed": "MLP on pixels",
             "m3": "Pretrained ResNet-18", "m3_frozen": "Pretrained ResNet-18"}
-LABELS = {"m0": "M0 logistic regression", "m1": "M1 MLP, 1 ReLU layer", "m2": "M2 MLP, 5 sigmoid layers",
+LABELS = {"m0": "M0 logistic regression", "m1": "M1 MLP, 1 ReLU layer", "m2": "M2 MLP, 5 sigmoid layers", "m2_fixed": "M2 fixed, 5 ReLU layers",
           "m3": "M3 ResNet-18, fine-tuned", "m3_frozen": "M3 ResNet-18, frozen"}
 COLORS = {"Classical": "#eb6834", "MLP on pixels": "#2a78d6", "Pretrained ResNet-18": "#1baf7a"}
 
