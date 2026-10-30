@@ -1,0 +1,27 @@
+{
+  "test_images": 225,
+  "accuracy": {
+    "m3_1793355952561843000": {
+      "model": "m3",
+      "clean": 0.8311111111111111,
+      "tilt 10 degrees": 0.64,
+      "oblique view": 0.7822222222222223,
+      "close framing": 0.72,
+      "dim light": 0.7688888888888888,
+      "blur": 0.4088888888888889,
+      "jpeg compression": 0.7466666666666667,
+      "all together": 0.30666666666666664
+    },
+    "m3_augmented_1793378930229182800": {
+      "model": "m3_augmented",
+      "clean": 0.7911111111111111,
+      "tilt 10 degrees": 0.6888888888888889,
+      "oblique view": 0.7688888888888888,
+      "close framing": 0.72,
+      "dim light": 0.7644444444444445,
+      "blur": 0.4444444444444444,
+      "jpeg compression": 0.7111111111111111,
+      "all together": 0.38666666666666666
+    }
+  }
+}

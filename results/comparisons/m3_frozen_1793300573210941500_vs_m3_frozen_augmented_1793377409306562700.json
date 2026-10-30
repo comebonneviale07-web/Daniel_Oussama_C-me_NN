@@ -1,0 +1,12 @@
+{
+  "run_a": "m3_frozen_1793300573210941500",
+  "run_b": "m3_frozen_augmented_1793377409306562700",
+  "test_images": 225,
+  "accuracy_a": 0.7511111111111111,
+  "accuracy_b": 0.7066666666666667,
+  "both_right": 153,
+  "only_a_right": 16,
+  "only_b_right": 6,
+  "both_wrong": 50,
+  "mcnemar_exact_p_value": 0.052478790283203125
+}

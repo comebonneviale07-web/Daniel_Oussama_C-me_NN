@@ -1,0 +1,53 @@
+{
+  "model": "m3_augmented",
+  "data": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\data\\wikiart_style5",
+  "split": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\data\\splits\\style5.json",
+  "output": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\results\\M3\\v3_augmented",
+  "epochs": 15,
+  "batch_size": 32,
+  "lr": 0.0001,
+  "seed": 42,
+  "threads": 8,
+  "device": "cpu",
+  "split_only": false,
+  "model_version": "m3/v3_augmented",
+  "version_settings": {
+    "id": "m3_augmented",
+    "version": "m3/v3_augmented",
+    "kind": "resnet18",
+    "input_size": 224,
+    "normalization": "imagenet",
+    "frozen": false,
+    "augmentation": "paintings",
+    "optimizer": "adamw",
+    "weight_decay": 0.0001,
+    "scheduler": "cosine",
+    "label_smoothing": 0.1,
+    "selection_metric": "val_macro_f1",
+    "patience": 4,
+    "epochs": 15,
+    "lr": 0.0001
+  },
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "input_normalization": null,
+  "activation": null,
+  "dropout": null,
+  "torch_version": "2.7.0+cpu",
+  "numpy_version": "2.2.3",
+  "python_version": "3.13.1",
+  "package_versions": {
+    "torch": "2.7.0",
+    "torchvision": "0.22.0+cpu",
+    "scikit-learn": "1.7.0",
+    "numpy": "2.2.3",
+    "pillow": "11.1.0",
+    "matplotlib": "3.10.0"
+  },
+  "input_size": 224
+}

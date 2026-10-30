@@ -23,8 +23,13 @@ de test).
 | M0 v2_features (`m0_features`) | M0 v1 | 37,78 % → **50,67 %** | p = 0,004, significatif |
 | M1 v2_tuned (`m1_tuned`) | M1 v1 | 30,22 % → 37,33 % | p = 0,081, non significatif |
 | M2 v3_regularised (`m2_regularised`) | M2 v2 | 41,78 % → 36,44 % | p = 0,16, non significatif |
-| M3 v3_augmented (`m3_augmented`) | M3 v2 | en cours | |
-| M3 v4_frozen_augmented (`m3_frozen_augmented`) | M3 v1 | en cours | |
+| M3 v3_augmented (`m3_augmented`) | M3 v2 | 83,11 % → 79,11 % | p = 0,12, non significatif |
+| M3 v4_frozen_augmented (`m3_frozen_augmented`) | M3 v1 | 75,11 % → 70,67 % | p = 0,053, non significatif |
+
+Nouvelle commande `python main.py robustness` : sur les 225 images de test dégradées comme une photo de
+visiteur (inclinaison, vue oblique, cadrage, lumière, flou, compression cumulés), M3 v3_augmented obtient
+38,7 % contre 30,7 % pour v2 (p = 0,001, significatif) : l'augmentation ne gagne rien sur des scans propres
+mais rend le modèle plus robuste aux conditions de la borne.
 
 Au passage : M3 v1 gelé contre M3 v2 fine-tuné, 75,11 % → 83,11 %, p = 0,006 (gain du fine-tuning significatif).
 Détails et motivations dans les README de `configs/M0` à `configs/M3`.
