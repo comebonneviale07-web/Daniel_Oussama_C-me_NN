@@ -12,6 +12,7 @@ COMMANDS = {
     "backup": "src.backup",
     "document-runs": "src.document_runs",
     "compare": "src.compare",
+    "robustness": "src.robustness",
 }
 
 
