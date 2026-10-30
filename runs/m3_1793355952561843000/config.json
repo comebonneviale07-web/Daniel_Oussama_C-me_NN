@@ -1,0 +1,32 @@
+{
+  "model": "m3",
+  "data": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\data\\wikiart_style5",
+  "split": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\splits\\style5.json",
+  "output": "C:\\Users\\Oussama\\Daniel_Oussama_C-me_NN\\runs",
+  "epochs": 10,
+  "batch_size": 32,
+  "lr": 0.0001,
+  "seed": 42,
+  "threads": 8,
+  "device": "cpu",
+  "split_only": false,
+  "classes": [
+    "Baroque",
+    "Cubism",
+    "Impressionism",
+    "Pop_Art",
+    "Ukiyo_e"
+  ],
+  "torch_version": "2.7.0+cpu",
+  "numpy_version": "2.2.3",
+  "python_version": "3.13.1",
+  "package_versions": {
+    "torch": "2.7.0",
+    "torchvision": "0.22.0+cpu",
+    "scikit-learn": "1.7.0",
+    "numpy": "2.2.3",
+    "pillow": "11.1.0",
+    "matplotlib": "3.10.0"
+  },
+  "input_size": 224
+}

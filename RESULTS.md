@@ -6,9 +6,11 @@ using validation loss; these are test results, not validation results.
 
 | Model | Run folder under `runs/` | Test accuracy | Macro F1 | Total experiment time |
 | --- | --- | ---: | ---: | ---: |
+| M0 | `m0_1793355775110682900` | 37.78% | 0.3722 | 140 seconds (C = 0.01 chosen on validation) |
 | M1 | `m1_1793299518786019100` | 30.22% | 0.2565 | 35.3 seconds |
 | M2 | `m2_1793300452973140000` | 20.00% | 0.0667 | 92.6 seconds |
 | Frozen ResNet | `m3_frozen_1793300573210941500` | 75.11% | 0.7485 | 961.8 seconds |
+| Fine-tuned ResNet (M3) | `m3_1793355952561843000` | 83.11% | 0.8304 | 2,375 seconds (8 threads) |
 
 Times include experiment overhead and are not inference latency benchmarks.
 The run folders contain settings, split snapshots, training histories, curves,
@@ -16,9 +18,10 @@ confusion matrices and individual test predictions. M2 also contains gradient lo
 and plots. M2 predicted Cubism for every test image; stagnant performance alone
 does not establish vanishing gradients as the cause.
 
-M0's folder `m0_1793300405327349300` contains configuration and split files only.
-It is an incomplete run and has no reported performance. Full ResNet fine-tuning
-has not been rerun with the corrected shared split.
+M0's earlier folder `m0_1793300405327349300` is an incomplete run (configuration and split
+only); it is superseded by `m0_1793355775110682900`. M0 and M3 were run with
+`experiments.py` on the same shared split. Confidence intervals, CPU latency and model
+sizes are in the README section "CPU benchmark and recommendation to the director".
 
 ## What is saved where
 

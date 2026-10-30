@@ -67,6 +67,43 @@ The test set is evaluated after model selection. Do not tune settings against te
 Accuracy values are fractions, not percentages. Saved neural checkpoints include class
 order and architecture identifier. Do not load untrusted pickle/joblib model files.
 
+## CPU benchmark and recommendation to the director
+
+`python benchmark.py` takes the latest completed run of every model, times it on **one painting at a time and one
+CPU thread** (the model's own preprocessing included, 60 test paintings, median and 90th percentile), measures its
+serialised size, and computes 95 % bootstrap intervals from `test_predictions.csv`. Measured on a laptop AMD CPU
+(8 logical cores, 1 used); results in `runs/benchmark_1793358411979475300/`.
+
+| Model | Test accuracy [95 % CI] | Macro F1 | CPU time / painting (p90) | Size | Run |
+| --- | --- | ---: | ---: | ---: | --- |
+| M2 MLP, 5 sigmoid layers | 0.200 [0.151, 0.253] | 0.067 | 3.3 ms (4.5) | 25.9 MB | `m2_1793300452973140000` |
+| M1 MLP, 1 ReLU layer | 0.302 [0.244, 0.364] | 0.257 | 1.7 ms (1.8) | 12.6 MB | `m1_1793299518786019100` |
+| M0 logistic regression (pixels) | 0.378 [0.320, 0.444] | 0.372 | 0.6 ms (0.8) | 0.5 MB | `m0_1793355775110682900` |
+| M3 ResNet-18, frozen backbone | 0.751 [0.698, 0.809] | 0.749 | 158 ms (185) | 44.8 MB | `m3_frozen_1793300573210941500` |
+| **M3 ResNet-18, fine-tuned** | **0.831 [0.778, 0.880]** | **0.830** | **151 ms (202)** | **44.8 MB** | `m3_1793355952561843000` |
+
+![Accuracy vs CPU cost](runs/benchmark_1793358411979475300/accuracy_vs_latency.png)
+
+Both M3 variants have the same architecture, so the same inference cost (the 7 ms gap is timing noise); M1, M2 and
+M3 frozen were timed with their exact architecture because their weights are not on the benchmarking computer.
+
+**Recommendation: a neural network is worth it, but a pretrained one.**
+
+1. **Do not deploy an MLP trained on pixels.** M1 (0.30) does not beat a plain logistic regression on the same
+   pixels (0.38), and M2 predicts a single style (see [DIAGNOSIS.md](DIAGNOSIS.md) on the diagnosis branch). Both
+   are wrong on most paintings.
+2. **Deploy the fine-tuned ResNet-18 (M3):** 0.83 test accuracy, more than twice the classical model, with
+   non-overlapping confidence intervals. It answers in about 0.15 s per painting on a single CPU thread and takes
+   45 MB: no GPU and no cloud service, so no recurring cost on a modest kiosk.
+3. **Keep the frozen ResNet-18 (0.75) as the low-maintenance option:** same inference cost, and only its last
+   layer (2,565 parameters) has to be retrained when the collection changes. Fine-tuning adds about 8 points (the
+   intervals barely overlap) for 40 minutes of CPU training, done once.
+
+**Limits:** 225 test paintings (about +-6 points on each accuracy); WikiArt scans rather than visitors' photos
+(reflections, perspective, frames), to be tested before deployment; latency measured on one laptop CPU, to be
+measured again on the kiosk; the split is per image and 89 % of the test paintings are by "Unknown Artist", so
+the ResNet may partly recognise painters rather than styles and its scores may be optimistic.
+
 ## Legacy artifacts
 
 The existing `models/*.pth` and sigmoid curve come from the original training scripts.
