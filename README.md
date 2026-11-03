@@ -2,29 +2,30 @@
 
 Classification de 1 500 peintures en cinq styles, avec Python 3.13 sur CPU.
 
-## Les grandes cat?gories
+## Les grandes catégories
 
 ```text
 main.py      une seule commande pour utiliser le projet
 src/         tout le code Python
-configs/     mod?les M0, M1, M2, M3 ; versions JSON et un README par mod?le
+configs/     modèles M0, M1, M2, M3 ; versions JSON et un README par modèle
 tests/       tests : training / evaluation / prediction
-results/     entra?nements class?s par mod?le puis version
-docs/        r?sultats, diagnostic et historique
-data/        images, m?tadonn?es et splits partag?s
+results/     entraînements classés par modèle puis version
+docs/        résultats, diagnostic et historique
+data/        images, métadonnées et splits partagés
 archives/    anciens poids et sauvegardes ZIP
 ```
 
 Exemple : `configs/M2/` contient `v1_sigmoid.json`, `v2_relu.json` et un README
-qui compare les deux versions. Les entra?nements correspondants sont regroup?s
+qui compare les deux versions. Les entraînements correspondants sont regroupés
 dans `results/M2/v1_sigmoid/` et `results/M2/v2_relu/`.
 
-## Utilisation depuis la racine du d?p?t
+## Utilisation depuis la racine du dépôt
 
 ```bash
 source .venv/Scripts/activate
 python main.py train --model m2_fixed
 python main.py predict photo.jpg
+python main.py demo
 python main.py benchmark
 python main.py compare --run-a <run> --run-b <run>
 python main.py robustness --runs <run> <run>
@@ -52,21 +53,23 @@ de visiteur simulées (38,7 % contre 30,7 %, p = 0,001). Comparer deux runs : `p
 Robustesse : `python main.py robustness`. Tableau complet, tests statistiques et limites :
 [docs/RESULTS.md](docs/RESULTS.md).
 
-## O? regarder
+## Où regarder
 
-- [Catalogue des mod?les](docs/MODELS.md)
-- [R?sultats mesur?s](docs/RESULTS.md)
+- [Working local demo: launch and presentation checklist](docs/DEMO.md)
+
+- [Catalogue des modèles](docs/MODELS.md)
+- [Résultats mesurés](docs/RESULTS.md)
 - [Diagnostic](docs/DIAGNOSIS.md)
-- [Exp?riences et benchmark](docs/EXPERIMENTS.md)
+- [Expériences et benchmark](docs/EXPERIMENTS.md)
 - [Historique des changements](docs/CHANGELOG.md)
 - [Utilitaires et sauvegardes](docs/TOOLS.md)
 
-Chaque mod?le a une fiche dans `configs/M*/README.md`. Chaque nouveau run re?oit
-automatiquement un README avec sa version, ses r?glages et ses r?sultats.
-Les anciens chemins d?plac?s sont list?s dans `docs/PATHS.json`. Les chemins
-absolus des anciennes configurations d?crivent leur environnement d'origine.
+Chaque modèle a une fiche dans `configs/M*/README.md`. Chaque nouveau run reçoit
+automatiquement un README avec sa version, ses réglages et ses résultats.
+Les anciens chemins déplacés sont listés dans `docs/PATHS.json`. Les chemins
+absolus des anciennes configurations décrivent leur environnement d'origine.
 
-Le split partag? est dans `data/splits/style5.json` : 1 050 train / 225 validation /
-225 test. La normalisation de M2 corrig? utilise uniquement le train. Le split est
+Le split partagé est dans `data/splits/style5.json` : 1 050 train / 225 validation /
+225 test. La normalisation de M2 corrigé utilise uniquement le train. Le split est
 par image, pas par artiste. Les rapports sont dans Git ; les nouveaux checkpoints
-et les ZIP restent locaux. Copier les sauvegardes sur un stockage ind?pendant.
+et les ZIP restent locaux. Copier les sauvegardes sur un stockage indépendant.

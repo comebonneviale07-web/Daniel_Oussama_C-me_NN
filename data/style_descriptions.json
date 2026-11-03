@@ -1,0 +1,27 @@
+{
+  "Baroque": {
+    "label": "Baroque",
+    "description": "Baroque painting often creates a sense of drama through strong contrasts of light and shadow, expressive gestures, and energetic compositions.",
+    "look_for": ["Dramatic lighting", "A sense of movement", "Expressive figures"]
+  },
+  "Cubism": {
+    "label": "Cubism",
+    "description": "Cubism breaks subjects into geometric forms and can bring several viewpoints into the same image. Shapes and their relationships become part of the subject.",
+    "look_for": ["Angular shapes", "Fragmented subjects", "Overlapping viewpoints"]
+  },
+  "Impressionism": {
+    "label": "Impressionism",
+    "description": "Impressionist painting often explores changing light and atmosphere through visible brushwork and relationships between colours, rather than sharply defined detail.",
+    "look_for": ["Visible brushstrokes", "Changing light", "Colour and atmosphere"]
+  },
+  "Pop_Art": {
+    "label": "Pop art",
+    "description": "Pop art draws on imagery from popular culture, including advertising, comics, and everyday products. Bold colour, repetition, and familiar symbols often play a central role.",
+    "look_for": ["Popular imagery", "Bold colour", "Repetition or graphic outlines"]
+  },
+  "Ukiyo_e": {
+    "label": "Ukiyo-e",
+    "description": "Ukiyo-e is a Japanese tradition of prints and paintings depicting subjects such as landscapes, performers, and daily life. Many works use clear contours and areas of flat colour.",
+    "look_for": ["Clear contours", "Flat colour areas", "Decorative composition"]
+  }
+}

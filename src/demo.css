@@ -1,0 +1,93 @@
+:root {
+  --museum-navy: #0b2148;
+  --museum-blue: #265beb;
+  --museum-sky: #6bc4ff;
+  --museum-muted: #526787;
+}
+
+.stApp {
+  background: radial-gradient(ellipse at 95% 5%, #dceaff 0%, transparent 45%),
+    linear-gradient(180deg, #f0f5ff 0%, #f8faff 65%, #eef4fd 100%);
+  color: var(--museum-navy);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+[data-testid="stHeader"] { background: transparent; }
+.block-container { max-width: 1240px; padding: 2rem 2.5rem 3rem; }
+.stApp h1, .stApp h2, .stApp h3 { color: var(--museum-navy); font-family: "Segoe UI", Arial, sans-serif; }
+.stApp h1 { font-size: clamp(2.5rem, 5.4vw, 4.4rem); font-weight: 750;
+  line-height: 1.07; letter-spacing: -.055em; max-width: 850px; }
+.stApp h2 { letter-spacing: -.035em; }
+.stApp h3 { font-size: 1.35rem; letter-spacing: -.025em; }
+.stApp [data-testid="stCaptionContainer"], .stApp [data-testid="stCaptionContainer"] p {
+  color: var(--museum-muted);
+}
+
+.school-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  margin: .2rem 0 2.5rem; padding: 1.15rem 1.6rem; color: white;
+  background: linear-gradient(115deg, #071c42, #102f68 70%, #164491);
+  border: 1px solid #193d77; border-radius: 18px;
+  box-shadow: 0 14px 36px #0a28501a;
+}
+.school-lockup { display: flex; align-items: center; flex-wrap: wrap; gap: 1.1rem; }
+.school-albert { font-size: 1.05rem; font-weight: 800; letter-spacing: .09em; }
+.school-albert span { color: #89cfff; }
+.school-cross { font-size: 1.2rem; color: #70a4e6; font-weight: 300; }
+.school-mines { font-size: .9rem; font-weight: 750; letter-spacing: .075em; }
+.school-mines span { display: block; color: #a1c6fa; font-size: .72rem; letter-spacing: .22em; margin-top: .15rem; }
+.project-pill { font-size: .67rem; font-weight: 650; letter-spacing: .12em;
+  padding: .5rem .75rem; border-radius: 30px; color: #c4e3ff;
+  border: 1px solid #87b6ed55; white-space: nowrap; }
+.hero-eyebrow { margin: .1rem 0 .4rem; font-size: .73rem; font-weight: 750;
+  letter-spacing: .2em; color: var(--museum-blue); }
+.hero-rule { width: 62px; height: 4px; border-radius: 6px;
+  background: linear-gradient(90deg, var(--museum-blue), var(--museum-sky)); margin: .8rem 0 1.1rem; }
+.flow-row { display: flex; flex-wrap: wrap; gap: .8rem; margin: .8rem 0 1.7rem; }
+.flow-chip { display: flex; align-items: center; gap: .45rem; font-size: .77rem;
+  font-weight: 550; color: #304b74; padding: .4rem .8rem; border: 1px solid #d7e4f8;
+  border-radius: 30px; background: #ffffffb8; }
+.flow-chip b { color: var(--museum-blue); font-weight: 750; }
+
+.stApp .st-key-painting_panel, .stApp .st-key-prediction_panel {
+  background: #fff; border-color: #dbe5f4;
+  border-radius: 20px; box-shadow: 0 8px 30px #173c7009;
+}
+[data-testid="stAppDeployButton"] { display: none; }
+[data-testid="stFileUploader"] { border-radius: 14px; background: #f1f6ff; }
+.stApp [data-testid="stFileUploaderDropzone"] {
+  background: #f3f7ff; border: 1.5px dashed #91afe9;
+  border-radius: 14px; padding-top: 1.8rem; padding-bottom: 1.8rem;
+}
+.stApp [data-testid="stFileUploaderDropzone"] svg { color: #3566d8; }
+[data-testid="stImage"] img { border-radius: 14px; }
+.stButton button, .stDownloadButton button {
+  border: 1px solid #b3c9ee; color: #16428d; border-radius: 10px;
+  font-weight: 650; transition: background .18s ease, border-color .18s ease;
+}
+.stButton button:hover { background: #e9f1ff; border-color: #487bdd; color: #143979; }
+.stDownloadButton button { background: var(--museum-blue); color: white; border-color: var(--museum-blue); }
+.stDownloadButton button:hover { background: #1747c8; color: white; border-color: #1747c8; }
+.stButton button:focus-visible, .stDownloadButton button:focus-visible {
+  outline: 3px solid #8bb9ff; outline-offset: 3px;
+}
+[data-testid="stProgress"] { margin: .45rem 0 .75rem; }
+[data-testid="stExpander"] { border-color: #d5e2f5; border-radius: 12px; background: #ffffffa8; }
+.stApp hr { border-color: #d9e4f3; }
+.museum-footer { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  font-size: .72rem; color: #5d7295; margin-bottom: .6rem; }
+.museum-footer strong { color: #233f70; letter-spacing: .08em; font-size: .68rem; }
+
+@media (max-width: 700px) {
+  .block-container { padding: 1.3rem 1rem 2rem; }
+  .school-banner { padding: 1rem 1.1rem; border-radius: 14px; margin-bottom: 1.7rem; }
+  .school-lockup { gap: .7rem; }
+  .school-albert { font-size: .85rem; }
+  .school-mines { font-size: .75rem; }
+  .project-pill { display: none; }
+  .flow-row { gap: .4rem; }
+  .flow-chip { font-size: .7rem; padding: .35rem .6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stButton button, .stDownloadButton button { transition: none; }
+}

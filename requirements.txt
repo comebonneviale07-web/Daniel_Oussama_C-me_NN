@@ -7,3 +7,4 @@ scikit-learn
 matplotlib
 joblib
 threadpoolctl
+streamlit>=1.66,<2

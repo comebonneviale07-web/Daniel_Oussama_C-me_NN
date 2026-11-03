@@ -1,3 +1,20 @@
+# 3 November 2026 — local museum demo
+
+Readability cleanup: separate upload, prediction and layout functions; explicit model
+unpacking; simpler CSS selectors; repaired French accents in project instructions.
+
+Visual refresh: navy school banner, royal-blue controls and scores, pale-blue background,
+white panels and responsive typography, inspired by Albert School and Mines Paris–PSL.
+Styling is separated into `src/demo.css` and `.streamlit/config.toml`, both backed up.
+
+Added `python main.py demo`: a localhost Streamlit interface for image upload,
+top-three style scores, curated movement descriptions and a downloadable JSON result.
+It reuses the existing checkpoint loader and preprocessing; no model architecture,
+weights or training settings were changed. The demo handles camera orientation,
+invalid uploads and missing weights, and labels collection examples explicitly.
+See [DEMO.md](DEMO.md) for operation and limitations. The backup now includes the
+curated descriptions in addition to source code and run artifacts.
+
 # Organisation actuelle ? 30 octobre 2026
 
 Deuxi?me rangement : code dans src/, un point d'entr?e main.py, configurations

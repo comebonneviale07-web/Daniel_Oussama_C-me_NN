@@ -11,7 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     files = [p for p in ROOT.iterdir() if p.is_file() and
              (p.suffix in (".py", ".md", ".txt") or p.name == ".gitignore")]
-    for folder in ("results", "data/splits", "docs", "configs", "tests", "src"):
+    if (ROOT / "data/style_descriptions.json").is_file():
+        files.append(ROOT / "data/style_descriptions.json")
+    for folder in ("results", "data/splits", "docs", "configs", "tests", "src", ".streamlit"):
         files.extend(p for p in (ROOT / folder).rglob("*") if p.is_file()
                      and "__pycache__" not in p.parts and p.suffix != ".pyc")
     destination = ROOT / "archives/backups"

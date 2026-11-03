@@ -4,6 +4,7 @@ import importlib
 import sys
 
 COMMANDS = {
+    "demo": "src.demo",
     "train": "src.training",
     "predict": "src.predict",
     "benchmark": "src.benchmark",
